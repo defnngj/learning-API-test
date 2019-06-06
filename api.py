@@ -27,7 +27,6 @@ def hello_world():
 # 通过 URI 传参
 @app.route('/user/<username>')
 def get_user(username):
-    print("username--->", username)
     msg = "hello, {}".format(username)
     return jsonify({"code": 10200, "message": msg})
 
@@ -36,7 +35,6 @@ def get_user(username):
 # 控制uid只能是整型, 对请求方法做处理
 @app.route('/id/<int:uid>',  methods=["GET", "POST"])
 def get_uid(uid):
-    print("请求方法", request.method)
     if request.method == "GET":
         user_info = {"id": 1, "name": "tom", "age": 22}
         if uid != 1:
@@ -53,7 +51,6 @@ def get_uid(uid):
 def get_search():
     if request.method == "GET":
         searchword = request.args.get('q', '')
-        print("搜索关键字", searchword)
         if searchword == "selenium":
             data_list = ["selenium教程", "seleniumhq.org", "selenium环境安装"]
         else:
@@ -71,8 +68,6 @@ def post_login():
     if request.method == "POST":
         username = request.form.get('username')
         password = request.form.get('password')
-        print("username--->", username)
-        print("password--->", password)
 
         if username is None or password is None:
             response = {"code": 10102, "message": "username or passwrord is None"}
@@ -89,16 +84,11 @@ def post_login():
     else:
         return jsonify({"code": 10101, "message": "request method error"})
 
-"""
-b'\n{\n\t"name":"",\n\t"age":0,\n\t"height":0 \n}'
 
-添加的数据 {'name': '', 'age': 0, 'height': 0}
-"""
 # post请求，json参数方式
 @app.route('/add_user',  methods=["GET", "POST"])
 def post_add_user():
     if request.method == "POST":
-        print(request.get_data())
         try:
             data = json.loads(request.get_data())
         except json.decoder.JSONDecodeError:
@@ -129,8 +119,6 @@ def post_header():
     if request.method == 'POST':
         token = request.headers.get("token")
         ct = request.headers.get("Content-Type")
-        print("token", token)
-        print("Content-Type", ct)
 
         response = {"code": 10200, "message": "header ok!",
                     "data": {"token": token}}
@@ -144,15 +132,12 @@ def post_header():
 def post_auth():
     if request.method == 'POST':
         auth = request.headers.get("Authorization")
-        print("auth--->", auth)
         if auth is None:
             return jsonify({"code": 10101, "message": "Authorization None"})
         else:
             auth = auth.split()
             auth_parts = base64.b64decode(auth[1]).decode('utf-8').partition(':')
             userid, password = auth_parts[0], auth_parts[2]
-            print(userid)
-            print(password)
             if userid == "" or password == "":
                 return jsonify({"code": 10102, "message": "Authorization null"})
             
@@ -175,13 +160,8 @@ def allowed_file(filename):
 def upload_file():
     if request.method == 'POST':
         f = request.files['file']
-        print("文件", f)
-        print("文件名字", f.filename)
-
         if f and allowed_file(f.filename):
             filename = secure_filename(f.filename)
-            print(filename)
-            print("path", os.path.join(app.config['UPLOAD_FOLDER'], filename))
             f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             response = {"code": 10200, "message": "upload success!"} 
         else:
@@ -215,16 +195,6 @@ def more_used(pid):
         else:
             response = {"code": 10201, "message": "delete id None"}
         return jsonify(response)
-
-
-# 签名：
-# ?id = 1 & name = tom & time = 134123 & token = *……* & 123123（& *n
-
-# time = 123123 & token = *……* & 123123（& *n
-
-# 服务器：
-# token = admin 合法 
-# 当前时间    客户端时间 134123
 
 
 # 签名的接口 时间戳+ MD5加密
@@ -311,13 +281,4 @@ def post_aes():
 if __name__ == '__main__':
     app.debug = True
     app.run()
-
-
-"""
-http 协议
-
-浏览器（客户端）  --->   request --->  服务器端
-浏览器（客户端）  <--- response <--- 服务器端
-"""
-
 
