@@ -28,11 +28,12 @@ $ python api.py
  * Debugger is active!
  * Debugger PIN: 208-740-173
 ```
+
 __接口测试库__
 
 * [requests](https://2.python-requests.org//zh_CN/latest/user/quickstart.html)
 
-<br>
+
 #### http接口的基本信息
 ---
 
@@ -45,10 +46,12 @@ __接口测试库__
 * 参数加密方式
 * 返回值（错误码/提示信息/数据）
 
-<br>
+
 #### 接口测试
+---
 
 * 最简单的接口调用
+
 ```python
 import requests
 
@@ -56,14 +59,18 @@ r = requests.get("http://127.0.0.1:5000/")
 result = r.json()
 print(result)
 ```
+
 返回结果：
+
 ```json
-{'code': 10200, 'message': 'Welcome to API testing'}
+{"code": 10200, "message": "Welcome to API testing"}
 ```
 
 * RESTful 风格的API
 
 ```python
+import requests
+
 name = "tom"
 r = requests.get("http://127.0.0.1:5000/user/"+name)
 result = r.json()
@@ -73,11 +80,13 @@ print(result)
 返回结果：
 
 ```json
-{'code': 10200, 'message': 'hello, tom'}
+{"code": 10200, "message": "hello, tom"}
 ```
 
 * 根据用户id返回不同的结果
 ```python
+import requests
+
 uid = "1"
 r = requests.get("http://127.0.0.1:5000/id/"+uid)
 result = r.json()
@@ -88,8 +97,8 @@ print(result)
 返回结果：
 
 ```json
-{'code': 10101, 'message': 'user id null'}
-{'code': 10200, 'data': {'age': 22, 'id': 1, 'name': 'tom'}, 'message': 'success'}
+{"code": 10101, "message": "user id null"}
+{"code": 10200, "data": {"age": 22, "id": 1, "name": "tom"}, "message": "success"}
 
 ```
 
@@ -97,6 +106,8 @@ print(result)
 
 方法一
 ```python
+import requests
+
 payload = {'q': 'selenium'}
 r = requests.get("http://127.0.0.1:5000/search/", params=payload)
 result = r.json()
@@ -104,15 +115,25 @@ print(result)
 ```
 
 方式二
+
 ```python
+import requests
+
 r = requests.get("http://127.0.0.1:5000/search/?q=selenium")
 result = r.json()
 print(result)
 ```
+返回结果：
 
-* POST请求，参数类型为：```from-data```/```x-www-from-urlencode```格式
+```json
+{"code": 10200, "data": ["selenium教程", "seleniumhq.org", "selenium环境安装"], "message": "success"}
+```
+
+* POST 请求，参数类型为：```from-data```/```x-www-from-urlencode```格式
 
 ```python
+import requests
+
 payload = {'username': 'admin', "password": "a123456"}
 r = requests.post("http://127.0.0.1:5000/login", data=payload)
 result = r.json()
@@ -122,16 +143,18 @@ print(result)
 返回结果：
 
 ```json
-{'code': 10102, 'message': 'username or passwrord is None'}
-{'code': 10203, 'message': 'username or passwrord is null'}
-{'code': 10104, 'message': 'username or password error'}
-{'code': 10200, 'message': 'login success'}
+{"code": 10102, "message": "username or passwrord is None"}
+{"code": 10203, "message": "username or passwrord is null"}
+{"code": 10104, "message": "username or password error"}
+{"code": 10200, "message": "login success"}
 
 ```
 
 * POST请求，参数类型为：```JSON```格式
 
 ```python
+import requests
+
 payload = {'name': 'jack', "age": 22, "height": 177}
 r = requests.post("http://127.0.0.1:5000/add_user", json=payload)
 result = r.json()
@@ -141,10 +164,10 @@ print(result)
 返回结果：
 
 ```json
-{'code': 10102, 'message': 'key null'}
-{'code': 10103, 'message': 'name null'}
-{'code': 10104, 'message': 'name exist'}
-{'code': 10105, 'message': 'format error'}
-{'code': 10200, 'message': 'add success'}
+{"code": 10102, "message": "key null"}
+{"code": 10103, "message": "name null"}
+{"code": 10104, "message": "name exist"}
+{"code": 10105, "message": "format error"}
+{"code": 10200, "message": "add success"}
 
 ```
