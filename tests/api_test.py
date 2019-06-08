@@ -37,7 +37,7 @@ class GetUserDataTest(unittest.TestCase):
         print(result)
 
 
-@unittest.skip("aa")
+
 class GetSampleTest(unittest.TestCase):
 
     def test_sample_1(self):
@@ -50,6 +50,7 @@ class GetSampleTest(unittest.TestCase):
         r = requests.get("http://127.0.0.1:5000/search/?q=selenium")
         result = r.json()
         print(result)
+
 
 @unittest.skip("aa")
 class POSTSampleTest(unittest.TestCase):
@@ -78,6 +79,7 @@ class POSTSampleTest(unittest.TestCase):
         print(result)
 
 
+@unittest.skip("aa")
 class POSTJsonTest(unittest.TestCase):
 
     def test_sample_1(self):
