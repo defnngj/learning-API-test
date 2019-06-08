@@ -21,7 +21,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # 最简单的json格式返回
 @app.route('/')
 def hello_world():
-    return jsonify({"code": 10200, "message": "hello world", "data":{"id":"1"}})
+    return jsonify({"code": 10200, "message": "Welcome to API testing"})
 
 
 # 通过 URI 传参
@@ -31,8 +31,7 @@ def get_user(username):
     return jsonify({"code": 10200, "message": msg})
 
 
-
-# 控制uid只能是整型, 对请求方法做处理
+# 根据用户id返回数据
 @app.route('/id/<int:uid>',  methods=["GET", "POST"])
 def get_uid(uid):
     if request.method == "GET":
@@ -92,7 +91,7 @@ def post_add_user():
         try:
             data = json.loads(request.get_data())
         except json.decoder.JSONDecodeError:
-            return jsonify({"code": 10105, "message": "格式错误！！"})
+            return jsonify({"code": 10105, "message": "format error"})
         
         try:
             name = data["name"]
