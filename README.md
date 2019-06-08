@@ -13,10 +13,10 @@ __安装__
 $ pip install -r requirements.txt
 ```
 
-__启动接口服务__
+* __启动接口服务__
 
 ```shell
-$ python api.py
+$ python api_server.py
 
 * Serving Flask app "api" (lazy loading)
  * Environment: production
@@ -29,9 +29,11 @@ $ python api.py
  * Debugger PIN: 208-740-173
 ```
 
-__接口测试库__
+Flask Web框架可以非常简单的方式实现API，项目中的所有API都在```api_server.py ``` 文件中。 
 
-* [requests](https://2.python-requests.org//zh_CN/latest/user/quickstart.html)
+* __接口测试库__
+
+[Requests](https://2.python-requests.org//zh_CN/latest/user/quickstart.html) 所有例子使用Requests库调用，你也可以使用其他API测试工具，如Postman、JMeter等。
 
 
 ## http接口的基本信息
