@@ -7,10 +7,10 @@
 
 __安装__
 
-克隆或下载项目。
+克隆或下载项目，安装依赖。
 
 ```shell
-pip install requirements.txt
+$ pip install -r requirements.txt
 ```
 
 __启动接口服务__
@@ -132,7 +132,7 @@ print(result)
 {"code": 10200, "data": ["selenium教程", "seleniumhq.org", "selenium环境安装"], "message": "success"}
 ```
 
-#### POST请求
+#### POST请求
 
 参数类型为：```from-data```/```x-www-from-urlencode```格式
 
@@ -155,7 +155,7 @@ print(result)
 
 ```
 
-#### POST请求
+#### POST请求
 
 参数类型为：```JSON```格式
 
@@ -178,3 +178,4 @@ print(result)
 {"code": 10200, "message": "add success"}
 
 ```
+
