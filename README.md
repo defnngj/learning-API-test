@@ -2,8 +2,8 @@
 
 帮助你学习API接口测试。
 
-#### 开始
----
+## 开始
+
 
 __安装__
 
@@ -34,8 +34,8 @@ __接口测试库__
 * [requests](https://2.python-requests.org//zh_CN/latest/user/quickstart.html)
 
 
-#### http接口的基本信息
----
+## http接口的基本信息
+
 
 * URL (http://www.xxx.com/v1/login)
 * 方法：GET/POST/PUT/DELETE
@@ -47,10 +47,10 @@ __接口测试库__
 * 返回值（错误码/提示信息/数据）
 
 
-#### 接口测试
----
+## 接口测试例子
 
-* 最简单的接口调用
+
+#### 最简单的接口调用
 
 ```python
 import requests
@@ -66,7 +66,7 @@ print(result)
 {"code": 10200, "message": "Welcome to API testing"}
 ```
 
-* RESTful 风格的API
+#### RESTful 风格的API
 
 ```python
 import requests
@@ -83,7 +83,8 @@ print(result)
 {"code": 10200, "message": "hello, tom"}
 ```
 
-* 根据用户id返回不同的结果
+#### 根据用户id返回不同的结果
+
 ```python
 import requests
 
@@ -102,9 +103,10 @@ print(result)
 
 ```
 
-* 一般GET请求
+#### 一般GET请求
 
-方法一
+* 方法一
+
 ```python
 import requests
 
@@ -114,7 +116,7 @@ result = r.json()
 print(result)
 ```
 
-方式二
+* 方式二
 
 ```python
 import requests
@@ -123,13 +125,16 @@ r = requests.get("http://127.0.0.1:5000/search/?q=selenium")
 result = r.json()
 print(result)
 ```
+
 返回结果：
 
 ```json
 {"code": 10200, "data": ["selenium教程", "seleniumhq.org", "selenium环境安装"], "message": "success"}
 ```
 
-* POST 请求，参数类型为：```from-data```/```x-www-from-urlencode```格式
+#### POST请求
+
+参数类型为：```from-data```/```x-www-from-urlencode```格式
 
 ```python
 import requests
@@ -150,7 +155,9 @@ print(result)
 
 ```
 
-* POST请求，参数类型为：```JSON```格式
+#### POST请求
+
+参数类型为：```JSON```格式
 
 ```python
 import requests
