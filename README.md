@@ -179,3 +179,43 @@ print(result)
 
 ```
 
+#### 带Header的接口
+
+```python
+import requests
+
+headers = {'Content-Type': 'application/json',
+            "token": "3d80caXELzU1aWmHwxl0TzW7jtterObm8l5EeAfipnhyaKmhFl8KdhFRvy4"}
+r = requests.post("http://127.0.0.1:5000/header", headers=headers)
+result = r.json()
+print(result)
+
+```
+
+返回结果：
+
+```json
+{"code": 10200,"message": "header ok!", "data": {"Content-Type": "application/json", "token": "3d80caXELzU1aWmHwxl0TzW7jtterObm8l5EeAfipnhyaKmhFl8KdhFRvy4"} }
+
+```
+
+#### 带Basic Auth认证的接口
+
+```python
+import requests
+
+auth = ("admin", "admin123")
+r = requests.post("http://127.0.0.1:5000/auth", auth=auth)
+result = r.json()
+print(result)
+
+```
+
+返回结果：
+
+```json
+{"code": 10200, "message": "Authorization fail!"}
+{"code": 10101, "message": "Authorization None"}
+{"code": 10102, "message": "Authorization null"}
+{"code": 10102, "message": "Authorization success!"}
+```

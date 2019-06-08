@@ -111,16 +111,14 @@ def post_add_user():
         return jsonify({"code": 10101, "message": "request method error"})
 
 
-
 # 获取 header 信息处理
 @app.route('/header', methods=['GET', 'POST'])
 def post_header():
     if request.method == 'POST':
         token = request.headers.get("token")
         ct = request.headers.get("Content-Type")
-
         response = {"code": 10200, "message": "header ok!",
-                    "data": {"token": token}}
+                    "data": {"token": token,"Content-Type": ct}}
         return jsonify(response)
     else:
         return jsonify({"code": 10101, "message": "request method error"})

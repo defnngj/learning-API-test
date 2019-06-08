@@ -3,7 +3,6 @@ import unittest
 
 class sampleTest(unittest.TestCase):
 
-    @unittest.skip("aa")
     def test_sample(self):
         r = requests.get("http://127.0.0.1:5000/")
         result = r.json()
@@ -12,7 +11,6 @@ class sampleTest(unittest.TestCase):
 
 class SESTfulGetTest(unittest.TestCase):
 
-    @unittest.skip("aa")
     def test_sample(self):
         name = "tom"
         r = requests.get("http://127.0.0.1:5000/user/"+name)
@@ -22,14 +20,12 @@ class SESTfulGetTest(unittest.TestCase):
 
 class GetUserDataTest(unittest.TestCase):
     
-    @unittest.skip("aa")
     def test_uid_null(self):
         uid = "2"
         r = requests.get("http://127.0.0.1:5000/id/"+uid)
         result = r.json()
         print(result)
 
-    @unittest.skip("aa")
     def test_uid_exist(self):
         uid = "1"
         r = requests.get("http://127.0.0.1:5000/id/"+uid)
@@ -52,7 +48,6 @@ class GetSampleTest(unittest.TestCase):
         print(result)
 
 
-@unittest.skip("aa")
 class POSTSampleTest(unittest.TestCase):
 
     def test_sample_1(self):
@@ -79,12 +74,65 @@ class POSTSampleTest(unittest.TestCase):
         print(result)
 
 
-@unittest.skip("aa")
 class POSTJsonTest(unittest.TestCase):
 
-    def test_sample_1(self):
+    def test_key_null(self):
+        payload = {}
+        r = requests.post("http://127.0.0.1:5000/add_user", json=payload)
+        result = r.json()
+        print(result)
+
+    def test_name_null(self):
+        payload = {"name": "", "age": 22, "height": 177}
+        r = requests.post("http://127.0.0.1:5000/add_user", json=payload)
+        result = r.json()
+        print(result)
+
+    def test_name_exist(self):
+        payload = {"name": "tom", "age": 22, "height": 177}
+        r = requests.post("http://127.0.0.1:5000/add_user", json=payload)
+        result = r.json()
+        print(result)
+
+    def test_add_success(self):
         payload = {'name': 'jack', "age": 22, "height": 177}
         r = requests.post("http://127.0.0.1:5000/add_user", json=payload)
+        result = r.json()
+        print(result)
+
+
+class HeadersTest(unittest.TestCase):
+
+    def test_smaple(self):
+        headers = {'Content-Type': 'application/json',
+                   "token": "3d80caXELzU1aWmHwxl0TzW7jtterObm8l5EeAfipnhyaKmhFl8KdhFRvy4"}
+        r = requests.post("http://127.0.0.1:5000/header", headers=headers)
+        result = r.json()
+        print(result)
+
+
+class AuthTest(unittest.TestCase):
+
+    def test_auth_none(self):
+        r = requests.post("http://127.0.0.1:5000/auth")
+        result = r.json()
+        print(result)
+
+    def test_auth_null(self):
+        auth = ("", "")
+        r = requests.post("http://127.0.0.1:5000/auth", auth=auth)
+        result = r.json()
+        print(result)
+
+    def test_auth_fail(self):
+        auth = ("abc", "123")
+        r = requests.post("http://127.0.0.1:5000/auth", auth=auth)
+        result = r.json()
+        print(result)
+
+    def test_auth_success(self):
+        auth = ("admin", "admin123")
+        r = requests.post("http://127.0.0.1:5000/auth", auth=auth)
         result = r.json()
         print(result)
 
