@@ -226,10 +226,10 @@ print(result)
 返回结果：
 
 ```json
-{"code": 10200, "message": "Authorization fail!"}
 {"code": 10101, "message": "Authorization None"}
 {"code": 10102, "message": "Authorization null"}
-{"code": 10102, "message": "Authorization success!"}
+{"code": 10103, "message": "Authorization fail!"}
+{"code": 10200, "message": "Authorization success!"}
 ```
 
 #### 上传文件的接口

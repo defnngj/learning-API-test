@@ -138,9 +138,9 @@ def post_auth():
                 return jsonify({"code": 10102, "message": "Authorization null"})
             
             if userid == "admin" and password == "admin123":
-                return jsonify({"code": 10102, "message": "Authorization success!"})
+                return jsonify({"code": 10200, "message": "Authorization success!"})
             else:
-                return jsonify({"code": 10200, "message": "Authorization fail!"})
+                return jsonify({"code": 10103, "message": "Authorization fail!"})
     else:
         return jsonify({"code": 10101, "message": "request method error"})
 
