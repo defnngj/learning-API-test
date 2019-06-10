@@ -10,8 +10,8 @@ from werkzeug import secure_filename
 from Crypto.Cipher import AES    # 请安装 Crypto
 
 
-
-UPLOAD_FOLDER = '/Users/tech/klpro/github/myapi/uploads'
+BASE_PATH = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = BASE_PATH + '/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', "json"])
 
 app = Flask(__name__)
@@ -58,7 +58,6 @@ def get_search():
         return jsonify(response)
     else:
         return jsonify({"code": 10101, "message": "request method error"})
-
 
 
 # post请求， from-data/x-www-from-urlencode参数方式

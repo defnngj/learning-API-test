@@ -137,5 +137,14 @@ class AuthTest(unittest.TestCase):
         print(result)
 
 
+class UploadFileTest(unittest.TestCase):
+
+    def test_sample(self):
+        files = {'file': open('D:\\log.txt', 'rb')}
+        r = requests.post("http://127.0.0.1:5000/upload", files=files)
+        result = r.json()
+        print(result)
+
+
 if __name__ == '__main__':
     unittest.main()

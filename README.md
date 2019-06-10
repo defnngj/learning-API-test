@@ -18,7 +18,7 @@ $ pip install -r requirements.txt
 ```shell
 $ python api_server.py
 
-* Serving Flask app "api" (lazy loading)
+* Serving Flask app "api_server.py" (lazy loading)
  * Environment: production
    WARNING: Do not use the development server in a production environment.
    Use a production WSGI server instead.
@@ -220,4 +220,22 @@ print(result)
 {"code": 10101, "message": "Authorization None"}
 {"code": 10102, "message": "Authorization null"}
 {"code": 10102, "message": "Authorization success!"}
+```
+
+#### 上传文件的接口
+
+```python
+import requests
+
+files = {'file': open('D:\\log.txt', 'rb')}
+r = requests.post("http://127.0.0.1:5000/upload", files=files)
+result = r.json()
+print(result)
+
+```
+
+返回结果：
+
+```json
+{"code": 10200, "message": "upload success!"}
 ```
