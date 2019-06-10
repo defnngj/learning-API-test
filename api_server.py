@@ -169,27 +169,39 @@ def upload_file():
 
 
 # 一个URL, 根据不同的方法做不同的处理
-@app.route('/product/<int:pid>', methods=['GET', 'POST', "PUT", "DELETE"])
+@app.route('/phone/<int:pid>', methods=['GET', 'POST', "PUT", "DELETE"])
 def more_used(pid):
     if request.method == 'GET':
         if pid == 1:
-            product_info = {
+            phone_info = {
                 "id": pid,
-                "name": "手机",
+                "name": "小米手机",
                 "price": 1999
             }
-            response = {"code": 10200,
-                        "message": "success", "data": product_info}
+            response = {"code": 10201, "message": "get success", "data": phone_info}
         else:
-            response = {"code": 10200,
-                        "message": "success", "data": {}}
+            response = {"code": 10101, "message": "The phone id is empty"}
+        return jsonify(response)
+
+    elif request.method == "PUT":
+        if pid == 1:
+            name = request.form.get('name')
+            price = request.form.get('price')
+            phone_info = {
+                "id": pid,
+                "name": name,
+                "price": price
+            }
+            response = {"code": 10202, "message": "update success", "data": phone_info}
+        else:
+            response = {"code": 10102, "message": "The updated phone id is empty"}
         return jsonify(response)
 
     elif request.method == "DELETE":
         if pid == 1:
-            response = {"code": 10201, "message": "delete success"}
+            response = {"code": 10203, "message": "delete success"}
         else:
-            response = {"code": 10201, "message": "delete id None"}
+            response = {"code": 10103, "message": "The deleted phone id is empty"}
         return jsonify(response)
 
 

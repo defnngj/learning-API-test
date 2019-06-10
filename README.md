@@ -249,3 +249,70 @@ print(result)
 ```json
 {"code": 10200, "message": "upload success!"}
 ```
+
+
+#### 同一个URL，根据方法实现不同功能
+
+* ```GET```请求
+
+```python
+import requests
+
+r = requests.get("http://127.0.0.1:5000/phone/1")
+result = r.json()
+print(result)
+
+```
+
+返回结果：
+
+```json
+{"code": 10101, "message": "The phone id is empty"}
+{"code": 10201, "message": "get success", 
+ "data": {
+   "id": 1, "name": "小米手机", "price": 1999
+  }
+}
+```
+
+* ```PUT```请求
+
+```python
+import requests
+
+data = {"name":"华为手机", "price": "3999"}
+r = requests.put("http://127.0.0.1:5000/phone/1", data=data)
+result = r.json()
+print(result)
+
+```
+
+返回结果：
+
+```json
+{"code": 10102, "message": "The updated phone id is empty"}
+{"code": 10202, "message": "update success",
+ "data": {
+   "id": 1, "name": "华为手机", "price": "3999"
+  }
+}
+```
+
+* ```DELETE```请求
+
+```python
+import requests
+
+data = {"name":"华为手机", "price": "3999"}
+r = requests.put("http://127.0.0.1:5000/phone/1", data=data)
+result = r.json()
+print(result)
+
+```
+
+返回结果：
+
+```json
+{"code": 10103, "message": "The deleted phone id is empty"}
+{"code": 10203, "message": "delete success"}
+```

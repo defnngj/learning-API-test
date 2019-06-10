@@ -146,5 +146,23 @@ class UploadFileTest(unittest.TestCase):
         print(result)
 
 
+class MoreMethodTest(unittest.TestCase):
+
+    def test_get_method(self):
+        r = requests.get("http://127.0.0.1:5000/phone/1")
+        result = r.json()
+        print(result)
+
+    def test_put_method(self):
+        data = {"name": "华为手机", "price": "3999"}
+        r = requests.put("http://127.0.0.1:5000/phone/1", data=data)
+        result = r.json()
+        print(result)
+
+    def test_delete_method(self):
+        r = requests.delete("http://127.0.0.1:5000/phone/1")
+        result = r.json()
+        print(result)
+
 if __name__ == '__main__':
     unittest.main()
