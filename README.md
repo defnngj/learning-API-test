@@ -177,7 +177,11 @@ print(result)
 {"code": 10103, "message": "name null"}
 {"code": 10104, "message": "name exist"}
 {"code": 10105, "message": "format error"}
-{"code": 10200, "message": "add success"}
+{"code": 10200, "message": "add success",  
+ "data": {
+   "age": 22, "height": 177, "name": "jack"
+   },
+}
 
 ```
 
@@ -186,7 +190,7 @@ print(result)
 ```python
 import requests
 
-headers = {'Content-Type': 'application/json',
+headers = {"Content-Type": "application/json",
             "token": "3d80caXELzU1aWmHwxl0TzW7jtterObm8l5EeAfipnhyaKmhFl8KdhFRvy4"}
 r = requests.post("http://127.0.0.1:5000/header", headers=headers)
 result = r.json()
@@ -197,7 +201,13 @@ print(result)
 返回结果：
 
 ```json
-{"code": 10200,"message": "header ok!", "data": {"Content-Type": "application/json", "token": "3d80caXELzU1aWmHwxl0TzW7jtterObm8l5EeAfipnhyaKmhFl8KdhFRvy4"} }
+{
+  "code": 10200, "message": "header ok!", 
+  "data": {
+    "Content-Type": "application/json",
+    "token": "3d80caXELzU1aWmHwxl0TzW7jtterObm8l5EeAfipnhyaKmhFl8KdhFRvy4"
+   },
+}
 
 ```
 

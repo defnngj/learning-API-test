@@ -6,7 +6,7 @@ import time
 from flask import Flask
 from flask import jsonify
 from flask import request
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 from Crypto.Cipher import AES    # 请安装 Crypto
 
 
@@ -49,13 +49,12 @@ def get_uid(uid):
 @app.route("/search/", methods=["GET", "POST"])
 def get_search():
     if request.method == "GET":
-        searchword = request.args.get('q', '')
-        if searchword == "selenium":
+        search_word = request.args.get('q', '')
+        if search_word == "selenium":
             data_list = ["selenium教程", "seleniumhq.org", "selenium环境安装"]
         else:
             data_list = []
-        response = {"code": 10200, "message": "success", "data": data_list}
-        return jsonify(response)
+        return jsonify({"code": 10200, "message": "success", "data": data_list})
     else:
         return jsonify({"code": 10101, "message": "request method error"})
 
@@ -104,7 +103,8 @@ def post_add_user():
             elif name == "tom":
                 response = {"code": 10104, "message": "name exist"}
             else:
-                response = {"code": 10200, "message": "add success"}
+                data = {"name": name, "age": age, "height": height}
+                response = {"code": 10200, "message": "add success", "data": data}
         return jsonify(response)
     else:
         return jsonify({"code": 10101, "message": "request method error"})
