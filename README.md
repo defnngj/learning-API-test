@@ -253,7 +253,7 @@ print(result)
 
 #### 同一个URL，根据方法实现不同功能
 
-* ```GET```请求
+* ```GET```请求，一般用作获取数据接口。
 
 ```python
 import requests
@@ -275,7 +275,7 @@ print(result)
 }
 ```
 
-* ```PUT```请求
+* ```PUT```请求，一般用作更新数据接口。
 
 ```python
 import requests
@@ -298,13 +298,13 @@ print(result)
 }
 ```
 
-* ```DELETE```请求
+* ```DELETE```请求, 一般用作删除数据接口。
 
 ```python
 import requests
 
 data = {"name":"华为手机", "price": "3999"}
-r = requests.put("http://127.0.0.1:5000/phone/1", data=data)
+r = requests.delete("http://127.0.0.1:5000/phone/1", data=data)
 result = r.json()
 print(result)
 
