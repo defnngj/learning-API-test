@@ -316,3 +316,26 @@ print(result)
 {"code": 10103, "message": "The deleted phone id is empty"}
 {"code": 10203, "message": "delete success"}
 ```
+
+
+#### 通过Session记录登录状态
+
+```python
+import requests
+
+s = requests.Session()
+r = s.post("http://127.0.0.1:5000/user_login", data={"username": "jack", "password": "123"})
+result = r.json()
+print(result)
+
+r2 = s.get("http://127.0.0.1:5000/user_data")
+result2 = r2.json()
+print(result2)
+```
+
+返回结果：
+
+```json
+{"code": 10200, "message": "login success"}
+{"code": 10200, "message": "hello, jack"}
+```

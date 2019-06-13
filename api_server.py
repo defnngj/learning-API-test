@@ -6,6 +6,8 @@ import time
 from flask import Flask
 from flask import jsonify
 from flask import request
+from flask import session
+from flask import escape
 from werkzeug.utils import secure_filename
 from Crypto.Cipher import AES    # 请安装 Crypto
 
@@ -16,6 +18,7 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', "json"])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.secret_key = 'please-generate-a-random-secret_key'
 
 
 # 最简单的json格式返回
@@ -203,6 +206,26 @@ def more_used(pid):
         else:
             response = {"code": 10103, "message": "The deleted phone id is empty"}
         return jsonify(response)
+
+
+# 通过Session 记录登录状态
+@app.route("/user_login", methods=['POST'])
+def session_login():
+    username = request.form['username']
+    password = request.form['password']
+    if username != "" and password != "":
+        session['username'] = username
+        return jsonify({"code": 10200, "message": 'login success'})
+    else:
+        return jsonify({"code": 10200, "message": 'login faile'})
+
+
+@app.route("/user_data")
+def session_user_data():
+    if 'username' in session:
+        username = format(escape(session['username']))
+        return jsonify({"code": 10200, "message": 'hello, {}'.format(username)})
+    return jsonify({"code": 10200, "message": 'hello, stranger'})
 
 
 # 签名的接口 时间戳+ MD5加密

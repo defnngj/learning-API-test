@@ -33,7 +33,6 @@ class GetUserDataTest(unittest.TestCase):
         print(result)
 
 
-
 class GetSampleTest(unittest.TestCase):
 
     def test_sample_1(self):
@@ -163,6 +162,19 @@ class MoreMethodTest(unittest.TestCase):
         r = requests.delete("http://127.0.0.1:5000/phone/1")
         result = r.json()
         print(result)
+
+
+class SessionTest(unittest.TestCase):
+
+    def test_sample(self):
+        s = requests.Session()
+        r = s.post("http://127.0.0.1:5000/user_login", data={"username": "jack", "password": "123"})
+        result = r.json()
+        print(result)
+        r2 = s.get("http://127.0.0.1:5000/user_data")
+        result2 = r2.json()
+        print(result2)
+
 
 if __name__ == '__main__':
     unittest.main()
