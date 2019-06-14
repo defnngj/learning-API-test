@@ -33,7 +33,7 @@ Flask Web框架可以非常简单的方式实现API，项目中的所有API都�
 
 * __接口测试库__
 
-[Requests](https://2.python-requests.org//zh_CN/latest/user/quickstart.html) 所有例子使用Requests库调用，你也可以使用其他API测试工具，如Postman、JMeter等。
+所有例子使用[Requests](https://2.python-requests.org//zh_CN/latest/user/quickstart.html) 库调用，你也可以使用其他API测试工具，如Postman、JMeter等。
 
 
 ## http接口的基本信息
@@ -303,8 +303,7 @@ print(result)
 ```python
 import requests
 
-data = {"name":"华为手机", "price": "3999"}
-r = requests.delete("http://127.0.0.1:5000/phone/1", data=data)
+r = requests.delete("http://127.0.0.1:5000/phone/1")
 result = r.json()
 print(result)
 
