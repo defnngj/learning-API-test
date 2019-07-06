@@ -338,3 +338,31 @@ print(result2)
 {"code": 10200, "message": "login success"}
 {"code": 10200, "message": "hello, jack"}
 ```
+
+
+#### 依赖接口的调用
+
+一个获取抽奖号码的接口，需要先得到抽奖活动id 和 抽奖用户id
+```python
+r = requests.get("http://127.0.0.1:5000/get_activity")
+result = r.json()
+activity_id = result["data"]["id"]
+print(activity_id)
+r = requests.get("http://127.0.0.1:5000/get_user")
+result = r.json()
+user_id = result["data"]["id"]
+print(user_id)
+
+data = {"aid": activity_id, "uid": user_id}
+r = requests.post("http://127.0.0.1:5000/lucky_number", data=data)
+result = r.json()
+print(result)
+````
+
+返回结果：
+
+```json
+{"code": 10200, "data": {"id": 1, "name": "618抽奖活动"}, "message": "success"}
+{"code": 10200, "data": {"id": 1, "name": "张三"}, "message": "success"}
+{"code": 10200, "data": 80092, "message": "Lucky draw number"}
+```

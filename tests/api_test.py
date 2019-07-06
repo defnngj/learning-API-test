@@ -176,5 +176,24 @@ class SessionTest(unittest.TestCase):
         print(result2)
 
 
+class DependencyTest(unittest.TestCase):
+
+    def test_sample(self):
+        r = requests.get("http://127.0.0.1:5000/get_activity")
+        result = r.json()
+        print(result)
+        activity_id = result["data"]["id"]
+
+        r = requests.get("http://127.0.0.1:5000/get_user")
+        result = r.json()
+        print(result)
+        user_id = result["data"]["id"]
+
+        data = {"aid": activity_id, "uid": user_id}
+        r = requests.post("http://127.0.0.1:5000/lucky_number", data=data)
+        result = r.json()
+        print(result)
+
+
 if __name__ == '__main__':
     unittest.main()

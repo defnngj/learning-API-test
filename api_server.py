@@ -29,7 +29,7 @@ def hello_world():
 
 # 通过 URI 传参
 @app.route('/user/<username>')
-def get_user(username):
+def user(username):
     msg = "hello, {}".format(username)
     return jsonify({"code": 10200, "message": msg})
 
@@ -120,7 +120,7 @@ def post_header():
         token = request.headers.get("token")
         ct = request.headers.get("Content-Type")
         response = {"code": 10200, "message": "header ok!",
-                    "data": {"token": token,"Content-Type": ct}}
+                    "data": {"token": token, "Content-Type": ct}}
         return jsonify(response)
     else:
         return jsonify({"code": 10101, "message": "request method error"})
@@ -226,6 +226,53 @@ def session_user_data():
         username = format(escape(session['username']))
         return jsonify({"code": 10200, "message": 'hello, {}'.format(username)})
     return jsonify({"code": 10200, "message": 'hello, stranger'})
+
+
+from random import randint
+
+
+# 接口的依赖
+@app.route('/get_activity',  methods=["GET", "POST"])
+def get_activity():
+    if request.method == "GET":
+        activity_info = {"id": 1, "name": "618抽奖活动"}
+        return jsonify({"code": 10200, "message": "success", "data": activity_info})
+    else:
+        return jsonify({"code": 10101, "message": "request method error"})
+
+
+@app.route('/get_user',  methods=["GET", "POST"])
+def get_user():
+    if request.method == "GET":
+        user_info = {"id": 1, "name": "张三"}
+        return jsonify({"code": 10200, "message": "success", "data": user_info})
+    else:
+        return jsonify({"code": 10101, "message": "request method error"})
+
+
+@app.route('/lucky_number', methods=["GET", "POST"])
+def get_lucky_number():
+    if request.method == "POST":
+        activity_id = request.form.get('aid')
+        user_id = request.form.get('uid')
+
+        if activity_id is None or user_id is None:
+            return jsonify({"code": 10102, "message": "username or password is None"})
+
+        elif activity_id == "" or user_id == "":
+            return jsonify({"code": 10103, "message": "username or password is null"})
+
+        if int(activity_id) != 1:
+            return jsonify({"code": 10104, "message": "activity id exist"})
+
+        if int(user_id) != 1:
+            return jsonify({"code": 10105, "message": "user id not exist"})
+
+        number = randint(10000, 99999)
+        return jsonify({"code": 10200, "message": "Lucky draw number", "data": number})
+
+    else:
+        return jsonify({"code": 10101, "message": "request method error"})
 
 
 # 签名的接口 时间戳+ MD5加密
