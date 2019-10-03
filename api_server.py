@@ -73,7 +73,7 @@ def post_login():
             response = {"code": 10102, "message": "username or passwrord is None"}
         
         elif username == "" or password == "":
-            response = {"code": 10203, "message": "username or passwrord is null"}
+            response = {"code": 10103, "message": "username or passwrord is null"}
         
         elif username == "admin" and password == "a123456":
             response = {"code": 10200, "message": "login success"}

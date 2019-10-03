@@ -112,7 +112,7 @@ print(result)
 ```python
 import requests
 
-payload = {'q': 'selenium'}
+payload = {"q": "selenium"}
 r = requests.get("http://127.0.0.1:5000/search/", params=payload)
 result = r.json()
 print(result)
@@ -141,7 +141,7 @@ print(result)
 ```python
 import requests
 
-payload = {'username': 'admin', "password": "a123456"}
+payload = {"username": "admin", "password": "a123456"}
 r = requests.post("http://127.0.0.1:5000/login", data=payload)
 result = r.json()
 print(result)
@@ -151,7 +151,7 @@ print(result)
 
 ```json
 {"code": 10102, "message": "username or passwrord is None"}
-{"code": 10203, "message": "username or passwrord is null"}
+{"code": 10103, "message": "username or passwrord is null"}
 {"code": 10104, "message": "username or password error"}
 {"code": 10200, "message": "login success"}
 
@@ -164,7 +164,7 @@ print(result)
 ```python
 import requests
 
-payload = {'name': 'jack', "age": 22, "height": 177}
+payload = {"name": "jack", "age": 22, "height": 177}
 r = requests.post("http://127.0.0.1:5000/add_user", json=payload)
 result = r.json()
 print(result)
