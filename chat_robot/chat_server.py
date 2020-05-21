@@ -46,5 +46,5 @@ if __name__ == "__main__":
         NotFound,
         lambda r, e: sanic.response.empty(status=404)
     )
-    app.run(host="192.168.0.7", port=8000, protocol=WebSocketProtocol, debug=True)
+    app.run(host="127.0.0.1", port=8000, protocol=WebSocketProtocol, debug=True)
 

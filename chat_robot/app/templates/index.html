@@ -32,19 +32,18 @@
   </nav>
 
   <div class="container theme-showcase" role="main" style="margin-top: 80px;">
-      <div id="contents" style="height: 600px; background-color:#eee;"></div>
+      <div id="contents" style="height: 600px; overflow: auto; background-color:#eee;"></div>
       <div>
           <textarea class="form-control" id="msg"></textarea>
           <button class="btn btn-lg btn-info" onclick="sendMsg()" style="float: right;">发送</button>
       </div>
-
   </div>
 
 
   <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript">
 
-          var ws = new WebSocket("ws://192.168.0.7:8000/chat");
+          var ws = new WebSocket("ws://127.0.0.1:8000/chat");
           ws.onmessage = function(e) {
               $("#contents").append('<div class="alert alert-info" role="alert" style="float: left;">' + "机器人: " + e.data + "</div><br><br><br><br>");
           }
