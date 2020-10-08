@@ -86,7 +86,7 @@ github地址：https://github.com/gin-gonic/gin
 
 ## 创建 gin 项目
 
-1. 根据官方例子创建 `example.go`
+1. 根据官方例子创建 `api_server.go`
 
 ```go
 package main
@@ -106,7 +106,7 @@ func main() {
 }
 ```
 
-2. 运行`example.go`文件.
+2. 运行`api_server.go`文件.
 
 ```shell
 > go run example.go
@@ -121,4 +121,12 @@ func main() {
 [GIN-debug] Listening and serving HTTP on :8080
 ```
 
-3. 通过浏览器访问：http://127.0.0.1:8080/hello
+3. 通过浏览器访问：`http://127.0.0.1:8080`
+
+```json
+{
+    code: "10200",
+    data: "hello gin!",
+    message: "success"
+}
+```
