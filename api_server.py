@@ -1,13 +1,15 @@
-import json
 import os
+import time
+import json
 import base64
 import hashlib
-import time
+from random import randint
 from flask import Flask
 from flask import jsonify
 from flask import request
 from flask import session
 from flask import escape
+from flask import send_from_directory
 from werkzeug.utils import secure_filename
 from Crypto.Cipher import AES    # 请安装 Crypto
 
@@ -171,6 +173,16 @@ def upload_file():
         return jsonify({"code": 10101, "message": "request method error"})
 
 
+# 文件下载接口
+@app.route("/download", methods=['GET'])
+def download_file():
+    if request.method == "GET":
+        return send_from_directory("./uploads", filename="log.txt", as_attachment=True)
+
+    else:
+        return jsonify({"code": 10101, "message": "request method error"})
+
+
 # 一个URL, 根据不同的方法做不同的处理
 @app.route('/phone/<int:pid>', methods=['GET', 'POST', "PUT", "DELETE"])
 def more_used(pid):
@@ -226,9 +238,6 @@ def session_user_data():
         username = format(escape(session['username']))
         return jsonify({"code": 10200, "message": 'hello, {}'.format(username)})
     return jsonify({"code": 10200, "message": 'hello, stranger'})
-
-
-from random import randint
 
 
 # 接口的依赖
