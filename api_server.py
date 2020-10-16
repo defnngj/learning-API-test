@@ -21,17 +21,29 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'please-generate-a-random-secret_key'
 
 
+def response(code=None, message=None, data=[]):
+    """
+    定义返回参数统一格式
+    """
+    if code is None:
+        code = 10200
+    if message is None:
+        message = "success"
+    
+    return jsonify({"code": code, "message": message, "data": data})
+
+
 # 最简单的json格式返回
 @app.route('/')
 def hello_world():
-    return jsonify({"code": 10200, "message": "Welcome to API testing"})
+    return response(message="Welcome to API testing")
 
 
 # 通过 URI 传参
 @app.route('/user/<username>')
 def user(username):
     msg = "hello, {}".format(username)
-    return jsonify({"code": 10200, "message": msg})
+    return response(message=msg)
 
 
 # 根据用户id返回数据
@@ -40,12 +52,12 @@ def get_uid(uid):
     if request.method == "GET":
         user_info = {"id": 1, "name": "tom", "age": 22}
         if uid != 1:
-            response = {"code": 10101, "message": "user id null"}
+            return response(10102, "user id null")
         else:
-            response = {"code": 10200, "message": "success", "data": user_info}
+            return response(data=user_info)
         return jsonify(response)
     else:
-        return jsonify({"code": 10101, "message": "request method error"})
+        return response(10101, "request method error")
 
 
 # 一般的get传参方式,
@@ -57,9 +69,9 @@ def get_search():
             data_list = ["selenium教程", "seleniumhq.org", "selenium环境安装"]
         else:
             data_list = []
-        return jsonify({"code": 10200, "message": "success", "data": data_list})
+        return response(dtaa=data_list)
     else:
-        return jsonify({"code": 10101, "message": "request method error"})
+        return response(10101, "request method error")
 
 
 # post请求， from-data/x-www-from-urlencode参数方式
@@ -70,19 +82,18 @@ def post_login():
         password = request.form.get('password')
 
         if username is None or password is None:
-            response = {"code": 10102, "message": "username or passwrord is None"}
+            return response(10102, "username or passwrord is None")
         
         elif username == "" or password == "":
-            response = {"code": 10103, "message": "username or passwrord is null"}
+            return response(10103, "username or passwrord is null")
         
         elif username == "admin" and password == "a123456":
-            response = {"code": 10200, "message": "login success"}
+            return response(10200, "login success")
         
         else:
-            response = {"code": 10104, "message": "username or password error"}
-        return jsonify(response)
+            return response(10104, "username or password error")
     else:
-        return jsonify({"code": 10101, "message": "request method error"})
+        return response(10101, "request method error")
 
 
 # post请求，json参数方式
@@ -99,18 +110,17 @@ def post_add_user():
             age = data["age"]
             height = data["height"]
         except KeyError:
-            response = {"code": 10102, "message": "key null"}
+            return response(10102, "key null")
         else:
             if name == "":
-                response = {"code": 10103, "message": "name null"}
+                return response(10103, "name null")
             elif name == "tom":
-                response = {"code": 10104, "message": "name exist"}
+                return response(10104, "name exist")
             else:
                 data = {"name": name, "age": age, "height": height}
-                response = {"code": 10200, "message": "add success", "data": data}
-        return jsonify(response)
+                return response(10200, "add success", data)
     else:
-        return jsonify({"code": 10101, "message": "request method error"})
+        return response(10101, "request method error")
 
 
 # 获取 header 信息处理
@@ -119,11 +129,9 @@ def post_header():
     if request.method == 'POST':
         token = request.headers.get("token")
         ct = request.headers.get("Content-Type")
-        response = {"code": 10200, "message": "header ok!",
-                    "data": {"token": token, "Content-Type": ct}}
-        return jsonify(response)
+        return response(10200, "header ok!", {"token": token, "Content-Type": ct})
     else:
-        return jsonify({"code": 10101, "message": "request method error"})
+        return response(10101, "request method error")
 
 
 # Base Auth认证  ["Basic","YWRtaW46YWRtaW4xMjM="]
@@ -145,7 +153,7 @@ def post_auth():
             else:
                 return jsonify({"code": 10103, "message": "Authorization fail!"})
     else:
-        return jsonify({"code": 10101, "message": "request method error"})
+        return response(10101, "request method error")
 
 
 # 文件后缀名的判断
@@ -168,7 +176,7 @@ def upload_file():
         return jsonify(response)
 
     else:
-        return jsonify({"code": 10101, "message": "request method error"})
+        return response(10101, "request method error")
 
 
 # 一个URL, 根据不同的方法做不同的处理
@@ -238,7 +246,7 @@ def get_activity():
         activity_info = {"id": 1, "name": "618抽奖活动"}
         return jsonify({"code": 10200, "message": "success", "data": activity_info})
     else:
-        return jsonify({"code": 10101, "message": "request method error"})
+        return response(10101, "request method error")
 
 
 @app.route('/get_user',  methods=["GET", "POST"])
@@ -247,7 +255,7 @@ def get_user():
         user_info = {"id": 1, "name": "张三"}
         return jsonify({"code": 10200, "message": "success", "data": user_info})
     else:
-        return jsonify({"code": 10101, "message": "request method error"})
+        return response(10101, "request method error")
 
 
 @app.route('/lucky_number', methods=["GET", "POST"])
@@ -272,7 +280,7 @@ def get_lucky_number():
         return jsonify({"code": 10200, "message": "Lucky draw number", "data": number})
 
     else:
-        return jsonify({"code": 10101, "message": "request method error"})
+        return response(10101, "request method error")
 
 
 # 签名的接口 时间戳+ MD5加密
@@ -299,7 +307,7 @@ def post_sign():
 
             # 签名检查
             md5 = hashlib.md5()
-            sign_str = client_time + "&Guest-Bugmaster"
+            sign_str = client_time + "&Guest-Bugmaster" + "a=1&b=2"
             sign_bytes_utf8 = sign_str.encode(encoding="utf-8")
             md5.update(sign_bytes_utf8)
             sever_sign = md5.hexdigest()
@@ -309,7 +317,7 @@ def post_sign():
                 return jsonify({"code": 10200, "message": "sign success!", "data": []})
 
     else:
-        return jsonify({"code": 10101, "message": "request method error"})
+        return response(10101, "request method error")
 
 
 ############ AES加密的接口 #############
@@ -349,7 +357,7 @@ def post_aes():
         return jsonify({"code": 10200, "message": "success", "data": dict_data})
 
     else:
-        return jsonify({"code": 10101, "message": "request method error"})
+        return response(10101, "request method error")
 
 ############ end #############
 
