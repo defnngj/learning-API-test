@@ -4,8 +4,7 @@
 
 ## 开始
 
-
-__安装__
+* __安装__
 
 克隆或下载项目，安装依赖。
 
@@ -35,24 +34,20 @@ Flask Web框架可以非常简单的方式实现API，项目中的所有API都�
 
 所有例子使用[Requests](https://2.python-requests.org//zh_CN/latest/user/quickstart.html) 库调用，你也可以使用其他API测试工具，如Postman、JMeter等。
 
-
 ## http接口的基本信息
-
 
 * URL (http://www.xxx.com/v1/login)
 * 方法：GET/POST/PUT/DELETE
-* Auth 
+* Auth
 * Header
 * 参数类型（form-data/json..）
 * 参数值（id=1，name=tom）
 * 参数加密方式
 * 返回值（错误码/提示信息/数据）
 
-
 ## 接口测试例子
 
-
-#### 最简单的接口调用
+### 最简单的接口调用
 
 ```python
 import requests
@@ -68,7 +63,7 @@ print(result)
 {"code": 10200, "message": "Welcome to API testing"}
 ```
 
-#### RESTful 风格的API
+### RESTful 风格的API
 
 ```python
 import requests
@@ -85,7 +80,7 @@ print(result)
 {"code": 10200, "message": "hello, tom"}
 ```
 
-#### 根据用户id返回不同的结果
+### 根据用户id返回不同的结果
 
 ```python
 import requests
@@ -105,7 +100,7 @@ print(result)
 
 ```
 
-#### 一般GET请求
+### 一般GET请求
 
 * 方法一
 
@@ -134,7 +129,7 @@ print(result)
 {"code": 10200, "data": ["selenium教程", "seleniumhq.org", "selenium环境安装"], "message": "success"}
 ```
 
-#### POST请求
+### POST请求
 
 参数类型为：```from-data```/```x-www-from-urlencode```格式
 
@@ -185,7 +180,7 @@ print(result)
 
 ```
 
-#### 带Header的接口
+### 带Header的接口
 
 ```python
 import requests
@@ -211,7 +206,7 @@ print(result)
 
 ```
 
-#### 带Basic Auth认证的接口
+### 带Basic Auth认证的接口
 
 ```python
 import requests
@@ -232,7 +227,7 @@ print(result)
 {"code": 10200, "message": "Authorization success!"}
 ```
 
-#### 上传文件的接口
+### 上传文件接口
 
 ```python
 import requests
@@ -250,8 +245,21 @@ print(result)
 {"code": 10200, "message": "upload success!"}
 ```
 
+### 下载文件接口
 
-#### 同一个URL，根据方法实现不同功能
+```python
+import requests
+
+r = requests.get("http://127.0.0.1:5000/download", stream=True)
+
+with open("./log.txt", "wb") as f:
+    for chunk in r.iter_content(chunk_size=512):
+        f.write(chunk)
+```
+
+文件默认保存在当前脚本文件所在目录，文件名为`log.txt`。
+
+### 同一个URL，根据方法实现不同功能
 
 * ```GET```请求，一般用作获取数据接口。
 
@@ -316,8 +324,7 @@ print(result)
 {"code": 10203, "message": "delete success"}
 ```
 
-
-#### 通过Session记录登录状态
+### 通过Session记录登录状态
 
 ```python
 import requests
@@ -339,10 +346,10 @@ print(result2)
 {"code": 10200, "message": "hello, jack"}
 ```
 
-
-#### 依赖接口的调用
+### 依赖接口的调用
 
 一个获取抽奖号码的接口，需要先得到抽奖活动id 和 抽奖用户id
+
 ```python
 # 获取活动id
 r = requests.get("http://127.0.0.1:5000/get_activity")
