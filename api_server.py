@@ -57,7 +57,6 @@ def get_uid(uid):
             return response(10102, "user id null")
         else:
             return response(data=user_info)
-        return jsonify(response)
     else:
         return response(10101, "request method error")
 
@@ -71,7 +70,7 @@ def get_search():
             data_list = ["selenium教程", "seleniumhq.org", "selenium环境安装"]
         else:
             data_list = []
-        return response(dtaa=data_list)
+        return response(data=data_list)
     else:
         return response(10101, "request method error")
 
@@ -105,7 +104,7 @@ def post_add_user():
         try:
             data = json.loads(request.get_data())
         except json.decoder.JSONDecodeError:
-            return jsonify({"code": 10105, "message": "format error"})
+            return response(10105, "format error")
         
         try:
             name = data["name"]
@@ -142,18 +141,18 @@ def post_auth():
     if request.method == 'POST':
         auth = request.headers.get("Authorization")
         if auth is None:
-            return jsonify({"code": 10101, "message": "Authorization None"})
+            return response(10101, "Authorization None")
         else:
             auth = auth.split()
             auth_parts = base64.b64decode(auth[1]).decode('utf-8').partition(':')
             userid, password = auth_parts[0], auth_parts[2]
             if userid == "" or password == "":
-                return jsonify({"code": 10102, "message": "Authorization null"})
+                return response(10102, "Authorization null")
             
             if userid == "admin" and password == "admin123":
-                return jsonify({"code": 10200, "message": "Authorization success!"})
+                return response(10200, "Authorization success!")
             else:
-                return jsonify({"code": 10103, "message": "Authorization fail!"})
+                return response(10103, "Authorization fail!")
     else:
         return response(10101, "request method error")
 
@@ -172,10 +171,9 @@ def upload_file():
         if f and allowed_file(f.filename):
             filename = secure_filename(f.filename)
             f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            response = {"code": 10200, "message": "upload success!"} 
+            return response(10200, "upload success!")
         else:
-            response = {"code": 10102, "message": "file type error!"}
-        return jsonify(response)
+            return response(10102, "file type error!")
 
     else:
         return response(10101, "request method error")
@@ -201,10 +199,9 @@ def more_used(pid):
                 "name": "小米手机",
                 "price": 1999
             }
-            response = {"code": 10201, "message": "get success", "data": phone_info}
+            return response(10201, "get success", phone_info)
         else:
-            response = {"code": 10101, "message": "The phone id is empty"}
-        return jsonify(response)
+            return response(10101, "The phone id is empty")
 
     elif request.method == "PUT":
         if pid == 1:
@@ -215,17 +212,15 @@ def more_used(pid):
                 "name": name,
                 "price": price
             }
-            response = {"code": 10202, "message": "update success", "data": phone_info}
+            return response(10202, "update success", phone_info)
         else:
-            response = {"code": 10102, "message": "The updated phone id is empty"}
-        return jsonify(response)
+            return response(10102, "The updated phone id is empty")
 
     elif request.method == "DELETE":
         if pid == 1:
-            response = {"code": 10203, "message": "delete success"}
+            return response(10203, "delete success")
         else:
-            response = {"code": 10103, "message": "The deleted phone id is empty"}
-        return jsonify(response)
+            return response(10103, "The deleted phone id is empty")
 
 
 # 通过Session 记录登录状态
@@ -235,17 +230,17 @@ def session_login():
     password = request.form['password']
     if username != "" and password != "":
         session['username'] = username
-        return jsonify({"code": 10200, "message": 'login success'})
+        return response(10200, 'login success')
     else:
-        return jsonify({"code": 10200, "message": 'login faile'})
+        return response(10200, 'login faile')
 
 
 @app.route("/user_data")
 def session_user_data():
     if 'username' in session:
         username = format(escape(session['username']))
-        return jsonify({"code": 10200, "message": 'hello, {}'.format(username)})
-    return jsonify({"code": 10200, "message": 'hello, stranger'})
+        return response(10200, 'hello, {}'.format(username))
+    return response(10200, 'hello, stranger')
 
 
 # 接口的依赖
@@ -253,7 +248,7 @@ def session_user_data():
 def get_activity():
     if request.method == "GET":
         activity_info = {"id": 1, "name": "618抽奖活动"}
-        return jsonify({"code": 10200, "message": "success", "data": activity_info})
+        return response(10200, "success", activity_info)
     else:
         return response(10101, "request method error")
 
@@ -262,7 +257,7 @@ def get_activity():
 def get_user():
     if request.method == "GET":
         user_info = {"id": 1, "name": "张三"}
-        return jsonify({"code": 10200, "message": "success", "data": user_info})
+        return response(10200, "success", user_info)
     else:
         return response(10101, "request method error")
 
@@ -274,19 +269,19 @@ def get_lucky_number():
         user_id = request.form.get('uid')
 
         if activity_id is None or user_id is None:
-            return jsonify({"code": 10102, "message": "username or password is None"})
+            return response(10102, "username or password is None")
 
         elif activity_id == "" or user_id == "":
-            return jsonify({"code": 10103, "message": "username or password is null"})
+            return response(10103, "username or password is null")
 
         if int(activity_id) != 1:
-            return jsonify({"code": 10104, "message": "activity id exist"})
+            return response(10104, "activity id exist")
 
         if int(user_id) != 1:
-            return jsonify({"code": 10105, "message": "user id not exist"})
+            return response(10105, "user id not exist")
 
         number = randint(10000, 99999)
-        return jsonify({"code": 10200, "message": "Lucky draw number", "data": number})
+        return response(10200, "Lucky draw number", number)
 
     else:
         return response(10101, "request method error")
@@ -300,10 +295,10 @@ def post_sign():
         client_sign = request.form.get('sign')  # 客户端签名 
 
         if client_time is None or client_sign is None:
-            return jsonify({"code": 10102, "message": "time or sign is None"})
+            return response(10102, "time or sign is None")
 
         elif client_time == "" or client_sign == "":
-            return jsonify({"code": 10103, "message": "time or sign is null"})
+            return response(10103, "time or sign is null")
         
         else:
             # 服务器时间
@@ -312,7 +307,7 @@ def post_sign():
             # 获取时间差
             time_difference = int(server_time) - int(client_time)
             if time_difference >= 60:
-                return jsonify({"code": 10104, "message": "timeout"})
+                return response(10104, "timeout")
 
             # 签名检查
             md5 = hashlib.md5()
@@ -321,9 +316,9 @@ def post_sign():
             md5.update(sign_bytes_utf8)
             sever_sign = md5.hexdigest()
             if sever_sign != client_sign:
-                return jsonify({"code": 10105, "message": "sign error!"})
+                return response(10105, "sign error!")
             else:
-                return jsonify({"code": 10200, "message": "sign success!", "data": []})
+                return response(10200, "sign success!")
 
     else:
         return response(10101, "request method error")
@@ -357,13 +352,13 @@ def post_aes():
         data = request.form.get('data')  # AES加密的数据
 
         if data is None or data == "":
-           return jsonify({"code": 10102, "message": "data is None"})
+           return response(10102, "data is None")
 
         # 解密
         decode = decryptAES(data)
         # 转化为字典
         dict_data = json.loads(decode)
-        return jsonify({"code": 10200, "message": "success", "data": dict_data})
+        return response(10200, "success", dict_data)
 
     else:
         return response(10101, "request method error")
