@@ -35,10 +35,21 @@ def response(code=None, message=None, data=[]):
     return jsonify({"code": code, "message": message, "data": data})
 
 
+class Number:
+    n = 0
+
+
 # 最简单的json格式返回
 @app.route('/')
 def hello_world():
     return response(message="Welcome to API testing")
+
+
+# 简单的计数器, 每次请求+1
+@app.route('/plusone')
+def plusone():
+    Number.n = Number.n + 1
+    return response(data={"number": Number.n})
 
 
 # 通过 URI 传参
