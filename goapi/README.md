@@ -86,30 +86,13 @@ github地址：https://github.com/gin-gonic/gin
 
 ## 创建 gin 项目
 
-1. 根据官方例子创建 `api_server.go`
+架构参考：https://www.jianshu.com/p/92919004293d
 
-```go
-package main
 
-import "github.com/gin-gonic/gin"
-
-func main() {
-    r := gin.Default()
-    r.GET("/hello", func(c *gin.Context) {
-        c.JSON(200, gin.H{
-            "code":    "10200",
-            "message": "success",
-            "data":    "hello gin!",
-        })
-    })
-    r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
-}
-```
-
-2. 运行`api_server.go`文件.
+1. 运行`main.go`文件.
 
 ```shell
-> go run example.go
+> go run main.go
 [GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
 
 [GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
