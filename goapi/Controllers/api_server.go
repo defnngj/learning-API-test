@@ -5,8 +5,10 @@ package Controllers
 */
 
 import (
-	//"gopai/Controllers/common/reponse"
+	"fmt"
+	"goapi/Controllers/common"
 	"github.com/gin-gonic/gin"
+	"reflect"
 )
 
 
@@ -38,88 +40,21 @@ func UserInfo(c *gin.Context) {
 	})
 }
 
-// func Login(c *gin.Context) {
-// 	username := c.PostForm("username")
-// 	password := c.PostForm("password")
+func Login(c *gin.Context) {
+	username := c.PostForm("username")
+	password := c.PostForm("password")
 
-// 	//判断返回值类型
-// 	fmt.Println(reflect.TypeOf(username))
-// 	fmt.Println(reflect.TypeOf(password))
+	//判断返回值类型
+	fmt.Println(reflect.TypeOf(username))
+	fmt.Println(reflect.TypeOf(password))
 
-// 	if username == "" || password == "" {
-// 		c.JSON(200, response("10101", "username or password null", ""))
-// 	} else if username != "admin" || password != "123" {
-// 		c.JSON(200, response("10102", "username or password error", ""))
-// 	} else {
-// 		c.JSON(200, response("10200", "success", ""))
-// 	}
+	if username == "" || password == "" {
+		c.JSON(200, common.Response("10101", "username or password null", ""))
+	} else if username != "admin" || password != "123" {
+		c.JSON(200, common.Response("10102", "username or password error", ""))
+	} else {
+		c.JSON(200, common.Response("10200", "success", ""))
 
-// }
+	}
 
-
-// func main() {
-// 	r := gin.Default()
-
-// 	/*
-// 		简单额的接口
-// 		http://127.0.0.1:8080/
-// 	*/
-// 	r.GET("/", func(c *gin.Context) {
-// 		c.JSON(200, gin.H{
-// 			"code":    "10200",
-// 			"message": "success",
-// 			"data":    "hello gin!",
-// 		})
-// 	})
-
-// 	/*
-// 		REST风格 GET请求
-// 		http://127.0.0.1:8080/user/tom
-// 	*/
-// 	r.GET("/user/:name", func(c *gin.Context) {
-// 		name := c.Param("name")
-// 		c.JSON(200, gin.H{
-// 			"code":    "10200",
-// 			"message": "success",
-// 			"data":    "hello, " + name,
-// 		})
-// 	})
-
-// 	/*
-// 		GET 请求
-// 		http://127.0.0.1:8080/users?name=tom
-// 	*/
-// 	r.GET("/users", func(c *gin.Context) {
-// 		name := c.Query("name")
-// 		role := c.DefaultQuery("role", "tearcher")
-// 		c.JSON(200, gin.H{
-// 			"code":    "10200",
-// 			"message": "success",
-// 			"data":    name + " is a " + role,
-// 		})
-// 	})
-
-// 	/*
-// 		POST 请求
-// 		http://127.0.0.1:8080/login
-// 	*/
-// 	r.POST("/login", func(c *gin.Context) {
-// 		username := c.PostForm("username")
-// 		password := c.PostForm("password")
-
-// 		//判断返回值类型
-// 		fmt.Println(reflect.TypeOf(username))
-// 		fmt.Println(reflect.TypeOf(password))
-
-// 		if username == "" || password == "" {
-// 			c.JSON(200, response("10101", "username or password null", ""))
-// 		} else if username != "admin" || password != "123" {
-// 			c.JSON(200, response("10102", "username or password error", ""))
-// 		} else {
-// 			c.JSON(200, response("10200", "success", ""))
-// 		}
-
-// 	})
-
-// 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
-// }
+}

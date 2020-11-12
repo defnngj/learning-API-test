@@ -14,8 +14,8 @@ func InitRouter() {
 		apiV1.GET("/", Controllers.Hello)
 		apiV1.GET("/user/:name", Controllers.HelloName)
 		apiV1.GET("/users", Controllers.UserInfo)
-		//apiV1.POST("/login", Controllers.Login)
+		apiV1.POST("/login", Controllers.Login)
     }
     
-    router.Run(":8080")
+    router.Run(":8081")
 }
