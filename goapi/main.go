@@ -1,9 +1,10 @@
 package main
 
 import (
-    "goapi/Router"
+	"goapi/router"
 )
 
 func main() {
-    Router.InitRouter()
+	r := router.InitRouter()
+	r.Run(":8081")
 }
