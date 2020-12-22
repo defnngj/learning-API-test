@@ -63,6 +63,25 @@ print(result)
 {"code": 10200, "message": "Welcome to API testing"}
 ```
 
+### 累加器
+
+每次请求数字加1
+
+```python
+import requests
+
+r = requests.get("http://127.0.0.1:5000/add_one")
+result = r.json()
+print(result)
+```
+
+返回结果：
+
+```json
+{"code": 10200, "data": { "number": 1 }, "message": "success"}
+```
+
+
 ### RESTful 风格的API
 
 ```python

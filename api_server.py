@@ -9,6 +9,8 @@ from flask import jsonify
 from flask import request
 from flask import session
 from flask import escape
+from flask_cors import CORS
+from flask import make_response
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
 from Crypto.Cipher import AES    # 请安装 Crypto
@@ -21,6 +23,7 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', "json"])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'please-generate-a-random-secret_key'
+# CORS(app, supports_credentials=True)
 
 
 def response(code=None, message=None, data=[]):
@@ -46,8 +49,8 @@ def hello_world():
 
 
 # 简单的计数器, 每次请求+1
-@app.route('/plusone')
-def plusone():
+@app.route('/add_one')
+def add_one():
     Number.n = Number.n + 1
     return response(data={"number": Number.n})
 
@@ -377,9 +380,7 @@ def post_aes():
 ############ end #############
 
 
-
-
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(port=5000)  # 设置端口
 
