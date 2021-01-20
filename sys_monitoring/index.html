@@ -1,91 +1,579 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <title>系统监控走势图</title>
+    <meta charset="utf-8" />
+    <title>CRM Dashboard | Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="https://coderthemes.com/hyper/creative/assets/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="https://coderthemes.com/hyper/creative/assets/css/app-creative.min.css" rel="stylesheet"
+        type="text/css">
+    <link href="https://coderthemes.com/hyper/creative/assets/css/app-creative-dark.min.css" rel="stylesheet"
+        type="text/css">
+</head>
+
+<body class="loading" data-layout="topnav"
+    data-layout-config='{"layoutBoxed":false,"darkMode":false,"showRightSidebarOnStart": true}'>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+                <!-- Topbar Start -->
+                <div class="navbar-custom topnav-navbar topnav-navbar-dark">
+                    <div class="container-fluid">
+
+                        <!-- LOGO -->
+                        <a href="" class="topnav-logo" style="margin-top: 10px;">
+                            <h3>system monitoring</h3>
+                        </a>
+
+                        <ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+                            <li class="dropdown notification-list d-lg-none">
+                                <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#"
+                                    role="button" aria-haspopup="false" aria-expanded="false">
+                                    <i class="dripicons-search noti-icon"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-animated dropdown-lg p-0">
+                                    <form class="p-3">
+                                        <input type="text" class="form-control" placeholder="Search ..."
+                                            aria-label="Recipient's username">
+                                    </form>
+                                </div>
+                            </li>
+
+                            <li class="dropdown notification-list">
+                                <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown"
+                                    id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <span>
+                                        <span class="account-user-name">Dominic Keller</span>
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown"
+                                    aria-labelledby="topbar-userdrop">
+                                    <!-- item-->
+                                    <div class=" dropdown-header noti-title">
+                                        <h6 class="text-overflow m-0">Welcome !</h6>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                        <a class="navbar-toggle" data-toggle="collapse" data-target="#topnav-menu-content">
+                            <div class="lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </a>
+                        <div class="app-search dropdown">
+                            <form>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search..." id="top-search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">Search</button>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <div class="dropdown-menu dropdown-menu-animated dropdown-lg" id="search-dropdown">
+                                <!-- item-->
+                                <div class="dropdown-header noti-title">
+                                    <h5 class="text-overflow mb-2">Found <span class="text-danger">17</span> results
+                                    </h5>
+                                </div>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="uil-notes font-16 mr-1"></i>
+                                    <span>Analytics Report</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="uil-life-ring font-16 mr-1"></i>
+                                    <span>How can I help you?</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="uil-cog font-16 mr-1"></i>
+                                    <span>User profile settings</span>
+                                </a>
+
+                                <!-- item-->
+                                <div class="dropdown-header noti-title">
+                                    <h6 class="text-overflow mb-2 text-uppercase">Users</h6>
+                                </div>
+
+                                <div class="notification-list">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="media">
+                                            <img class="d-flex mr-2 rounded-circle"
+                                                src="assets/images/users/avatar-2.jpg" alt="Generic placeholder image"
+                                                height="32">
+                                            <div class="media-body">
+                                                <h5 class="m-0 font-14">Erwin Brown</h5>
+                                                <span class="font-12 mb-0">UI Designer</span>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="media">
+                                            <img class="d-flex mr-2 rounded-circle"
+                                                src="assets/images/users/avatar-5.jpg" alt="Generic placeholder image"
+                                                height="32">
+                                            <div class="media-body">
+                                                <h5 class="m-0 font-14">Jacob Deo</h5>
+                                                <span class="font-12 mb-0">Developer</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end Topbar -->
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                        <li class="breadcrumb-item active">CRM</li>
+                                    </ol>
+                                </div>
+                                <h4 class="page-title">CRM</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+
+                        <div class="col-lg-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <h5 class="text-muted font-weight-normal mt-0 text-truncate"
+                                                title="Campaign Sent">Campaign Sent</h5>
+                                            <h3 class="my-2 py-1">9,184</h3>
+                                            <p class="mb-0 text-muted">
+                                                <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i>
+                                                    3.27%</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-right">
+                                                <div id="campaign-sent-chart" data-colors="#3688fc"></div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- end row-->
+                                </div> <!-- end card-body -->
+                            </div> <!-- end card -->
+                        </div> <!-- end col -->
+
+                        <div class="col-lg-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <h5 class="text-muted font-weight-normal mt-0 text-truncate"
+                                                title="New Leads">New Leads</h5>
+                                            <h3 class="my-2 py-1">3,254</h3>
+                                            <p class="mb-0 text-muted">
+                                                <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i>
+                                                    5.38%</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-right">
+                                                <div id="new-leads-chart" data-colors="#42d29d"></div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- end row-->
+                                </div> <!-- end card-body -->
+                            </div> <!-- end card -->
+                        </div> <!-- end col -->
+
+                        <div class="col-lg-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <h5 class="text-muted font-weight-normal mt-0 text-truncate" title="Deals">
+                                                Deals</h5>
+                                            <h3 class="my-2 py-1">861</h3>
+                                            <p class="mb-0 text-muted">
+                                                <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i>
+                                                    4.87%</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-right">
+                                                <div id="deals-chart" data-colors="#3688fc"></div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- end row-->
+                                </div> <!-- end card-body -->
+                            </div> <!-- end card -->
+                        </div> <!-- end col -->
+
+                        <div class="col-lg-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <h5 class="text-muted font-weight-normal mt-0 text-truncate"
+                                                title="Booked Revenue">Booked Revenue</h5>
+                                            <h3 class="my-2 py-1">$253k</h3>
+                                            <p class="mb-0 text-muted">
+                                                <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i>
+                                                    11.7%</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-right">
+                                                <div id="booked-revenue-chart" data-colors="#42d29d"></div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- end row-->
+                                </div> <!-- end card-body -->
+                            </div> <!-- end card -->
+                        </div> <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item">Today</a>
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item">Yesterday</a>
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item">Last Week</a>
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item">Last Month</a>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="header-title mb-1">Campaigns</h4>
+
+                                    <div id="dash-campaigns-chart" class="apex-charts"
+                                        data-colors="#42d29d,#ffa866,#44badc"></div>
+
+                                    <div class="row text-center mt-2">
+                                        <div class="col-md-4">
+                                            <i
+                                                class="mdi mdi-send widget-icon rounded-circle bg-light-lighten text-muted"></i>
+                                            <h3 class="font-weight-normal mt-3">
+                                                <span>6,510</span>
+                                            </h3>
+                                            <p class="text-muted mb-0 mb-2"><i
+                                                    class="mdi mdi-checkbox-blank-circle text-warning"></i> Total Sent
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <i
+                                                class="mdi mdi-flag-variant widget-icon rounded-circle bg-light-lighten text-muted"></i>
+                                            <h3 class="font-weight-normal mt-3">
+                                                <span>3,487</span>
+                                            </h3>
+                                            <p class="text-muted mb-0 mb-2"><i
+                                                    class="mdi mdi-checkbox-blank-circle text-primary"></i> Reached</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <i
+                                                class="mdi mdi-email-open widget-icon rounded-circle bg-light-lighten text-muted"></i>
+                                            <h3 class="font-weight-normal mt-3">
+                                                <span>1,568</span>
+                                            </h3>
+                                            <p class="text-muted mb-0 mb-2"><i
+                                                    class="mdi mdi-checkbox-blank-circle text-success"></i> Opened</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- end card body-->
+                            </div>
+                            <!-- end card -->
+                        </div>
+                        <!-- end col-->
+
+                        <div class="col-lg-7">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item">Today</a>
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item">Yesterday</a>
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item">Last Week</a>
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item">Last Month</a>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="header-title mb-3">CPU</h4>
+                                    <div id="dash-cpu-chart" class="apex-charts" data-colors="#42d29d,#44badc"
+                                        style="height:430px; padding:10px; background-color: #45515d;"></div>
+
+                                </div>
+                                <!-- end card body-->
+                            </div>
+                            <!-- end card -->
+                        </div>
+                        <!-- end col-->
+                    </div>
+                    <!-- end row-->
+
+                </div>
+                <!-- container -->
+
+            </div>
+            <!-- content -->
+
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <script>document.write(new Date().getFullYear())</script> © Hyper - Coderthemes.com
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-md-right footer-links d-none d-md-block">
+                                <a href="javascript: void(0);">About</a>
+                                <a href="javascript: void(0);">Support</a>
+                                <a href="javascript: void(0);">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end Footer -->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+    </div>
+    <!-- END wrapper -->
+
+    <!-- Right Sidebar -->
+    <div class="right-bar">
+
+        <div class="rightbar-title">
+            <a href="javascript:void(0);" class="right-bar-toggle float-right">
+                <i class="dripicons-cross noti-icon"></i>
+            </a>
+            <h5 class="m-0">Settings</h5>
+        </div>
+
+        <div class="rightbar-content h-100" data-simplebar>
+
+            <div class="p-3">
+                <div class="alert alert-warning" role="alert">
+                    <strong>Customize </strong> the overall color scheme, layout width, etc.
+                </div>
+
+                <!-- Settings -->
+                <h5 class="mt-3">Color Scheme</h5>
+                <hr class="mt-1" />
+
+                <div class="custom-control custom-switch mb-1">
+                    <input type="radio" class="custom-control-input" name="color-scheme-mode" value="light"
+                        id="light-mode-check" checked />
+                    <label class="custom-control-label" for="light-mode-check">Light Mode</label>
+                </div>
+
+                <div class="custom-control custom-switch mb-1">
+                    <input type="radio" class="custom-control-input" name="color-scheme-mode" value="dark"
+                        id="dark-mode-check" />
+                    <label class="custom-control-label" for="dark-mode-check">Dark Mode</label>
+                </div>
+
+                <!-- Width -->
+                <h5 class="mt-4">Width</h5>
+                <hr class="mt-1" />
+                <div class="custom-control custom-switch mb-1">
+                    <input type="radio" class="custom-control-input" name="width" value="fluid" id="fluid-check"
+                        checked />
+                    <label class="custom-control-label" for="fluid-check">Fluid</label>
+                </div>
+                <div class="custom-control custom-switch mb-1">
+                    <input type="radio" class="custom-control-input" name="width" value="boxed" id="boxed-check" />
+                    <label class="custom-control-label" for="boxed-check">Boxed</label>
+                </div>
+
+
+
+                <button class="btn btn-primary btn-block mt-4" id="resetBtn">Reset to Default</button>
+
+                <a href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/"
+                    class="btn btn-danger btn-block mt-3" target="_blank"><i class="mdi mdi-basket mr-1"></i> Purchase
+                    Now</a>
+            </div> <!-- end padding-->
+
+        </div>
+    </div>
+
+    <div class="rightbar-overlay"></div>
+    <!-- /Right-bar -->
     <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
     <!-- ECharts 5 引入 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.0.0/echarts.min.js"></script>
-</head>
+    <!-- bundle -->
+    <script src="https://coderthemes.com/hyper/creative/assets/js/vendor.min.js"></script>
+    <script src="https://coderthemes.com/hyper/creative/assets/js/app.min.js"></script>
 
-<body>
-    <div id="main" style="height:500px;border:1px solid #ccc;padding:10px;"></div>
+    <!-- Apex js -->
+    <script src="https://coderthemes.com/hyper/creative/assets/js/vendor/apexcharts.min.js"></script>
 
+    <!-- Todo js -->
+    <script src="https://coderthemes.com/hyper/creative/assets/js/ui/component.todo.js"></script>
+
+    <!-- demo app -->
+    <script src="https://coderthemes.com/hyper/creative/assets/js/pages/demo.dashboard-crm.js"></script>
+    <!-- end demo js-->
     <script type="text/javascript">
 
-    var myChart = echarts.init(document.getElementById('main'));
+        var myChart = echarts.init(document.getElementById('dash-cpu-chart'));
 
-    myChart.setOption({
-        title: {
-            text: '系统监控走势图'
-        },
-        tooltip: {},
-        legend: {
-            data:['cpu']
-        },
-        xAxis: {
-            data: []
-        },
-        yAxis: {},
-        series: [{
-            name: 'cpu',
-            type: 'line',
-            data: []
-        }]
-    });
-
-
-    var time = ["","","","","","","","","",""],
-        cpu = [0,0,0,0,0,0,0,0,0,0]
-
-
-    //准备好统一的 callback 函数
-    var update_mychart = function (res) {
-    //res是json格式的response对象
-
-        // 隐藏加载动画
-        myChart.hideLoading();
-
-        // 准备数据
-        time.push(res.data[0]);
-        cpu.push(parseFloat(res.data[1]));
-        if (time.length >= 10){
-            time.shift();
-            cpu.shift();
-        }
-
-        // 填入数据
         myChart.setOption({
+            title: {
+                text: 'CPU utilization'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#fa6767'
+                    }
+                }
+            },
+            legend: {
+                data: ['cpu', '内存']
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
             xAxis: {
-                data: time
+                type: 'category',
+                boundaryGap: false,
+                data: []
+            },
+            yAxis: {
+                type: 'value'
             },
             series: [{
-                name: 'cpu', // 根据名字对应到相应的系列
-                data: cpu
+                name: 'cpu',
+                type: 'line',
+                data: []
             }]
         });
 
-    };
 
-    // 首次显示加载动画
-    myChart.showLoading();
+        var time = ["", "", "", "", "", "", "", "", "", ""],
+            cpu = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
-    // 建立socket连接，等待服务器“推送”数据，用回调函数更新图表
-    $(document).ready(function() {
-        namespace = '/test_conn';
-        // var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace, {transports: ['websocket']});
-        console.log("asdfas", location.protocol + '//' + document.domain + ':' + location.port + namespace)
-        var socket = io.connect('http://127.0.0.1:9090' + namespace,
-        {transports: ['websocket']});
-        socket.on('server_response', function(res) {
-            console.log("data:", res.data);
-            update_mychart(res);
+        //准备好统一的 callback 函数
+        var update_mychart = function (res) {
+            //res是json格式的response对象
+
+            // 隐藏加载动画
+            myChart.hideLoading();
+
+            // 准备数据
+            time.push(res.data[0]);
+            cpu.push(parseFloat(res.data[1]));
+            if (time.length >= 10) {
+                time.shift();
+                cpu.shift();
+            }
+
+            // 填入数据
+            myChart.setOption({
+                xAxis: {
+                    data: time
+                },
+                series: [{
+                    name: 'cpu', // 根据名字对应到相应的系列
+                    data: cpu
+                }]
+            });
+
+        };
+
+        // 首次显示加载动画
+        myChart.showLoading();
+
+
+        // 建立socket连接，等待服务器“推送”数据，用回调函数更新图表
+        $(document).ready(function () {
+            namespace = '/test_conn';
+            var socket = io.connect('http://127.0.0.1:9090' + namespace,
+                { transports: ['websocket'] });
+            socket.on('server_response', function (res) {
+                console.log("data:", res.data);
+                update_mychart(res);
+            });
+
         });
-
-    });
 
     </script>
 </body>
+
 </html>

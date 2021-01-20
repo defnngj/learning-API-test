@@ -15,6 +15,14 @@ thread = None
 thread_lock = Lock()
 
 
+@app.route('/')
+def index():
+    """
+    Web页面
+    """
+    return render_template('index.html')
+
+
 @socketio.on('connect', namespace='/test_conn')
 def test_connect():
     global thread
@@ -36,9 +44,6 @@ def background_thread():
                       {'data': [t, cpus], 'count': count}, namespace='/test_conn')
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
 
 
 @socketio.on('client_event')
