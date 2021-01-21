@@ -11,8 +11,11 @@ from threading import Lock
 app = Flask(__name__, template_folder='./')
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, cors_allowed_origins='*')
-thread = None
-thread_lock = Lock()
+
+cpu_thread = None
+cpu_thread_lock = Lock()
+menery_thread = None
+menery_thread_lock = Lock()
 
 
 @app.route('/')
@@ -23,38 +26,46 @@ def index():
     return render_template('index.html')
 
 
-@socketio.on('connect', namespace='/test_conn')
-def test_connect():
-    global thread
-    with thread_lock:
-        if thread is None:
-            thread = socketio.start_background_task(target=background_thread)
+@socketio.on('connect', namespace='/get_cpu')
+def cpu_connect():
+    global cpu_thread
+    with cpu_thread_lock:
+        if cpu_thread is None:
+            cpu_thread = socketio.start_background_task(target=cpu_background_thread)
 
 
-def background_thread():
+def cpu_background_thread():
     count = 0
     while True:
         count += 1
         socketio.sleep(5)
-        t = time.strftime('%M:%S', time.localtime())
-        cpus = psutil.cpu_percent(interval=None, percpu=True)
+        t = time.strftime('%H:%M:%S', time.localtime())
+        cpu = psutil.cpu_percent(interval=None, percpu=True)
         print("t", t)
-        print("cpu", cpus)
+        print("cpu-->", t, cpu)
         socketio.emit('server_response',
-                      {'data': [t, cpus], 'count': count}, namespace='/test_conn')
+                      {'data': [t, cpu], 'count': count}, namespace='/get_cpu')
 
 
+@socketio.on('connect', namespace='/get_memory')
+def memory_connect():
+    global menery_thread
+    with menery_thread_lock:
+        if menery_thread is None:
+            menery_thread = socketio.start_background_task(target=memory_background_thread)
 
 
-@socketio.on('client_event')
-def client_msg(msg):
-    print("啥情况", msg)
-    emit('server_response', {'data': msg['data']})
-
-
-@socketio.on('connect_event')
-def connected_msg(msg):
-    emit('server_response', {'data': msg['data']})
+def memory_background_thread():
+    count = 0
+    while True:
+        count += 1
+        socketio.sleep(5)
+        t = time.strftime('%H:%M:%S', time.localtime())
+        memory = psutil.virtual_memory()
+        print("t", t)
+        print("memory-->", t, memory)
+        socketio.emit('server_response',
+                      {'data': [t, memory], 'count': count}, namespace='/get_memory')
 
 
 if __name__ == '__main__':

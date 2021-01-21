@@ -123,9 +123,6 @@
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <div class="media">
-                                            <img class="d-flex mr-2 rounded-circle"
-                                                src="assets/images/users/avatar-2.jpg" alt="Generic placeholder image"
-                                                height="32">
                                             <div class="media-body">
                                                 <h5 class="m-0 font-14">Erwin Brown</h5>
                                                 <span class="font-12 mb-0">UI Designer</span>
@@ -136,9 +133,6 @@
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <div class="media">
-                                            <img class="d-flex mr-2 rounded-circle"
-                                                src="assets/images/users/avatar-5.jpg" alt="Generic placeholder image"
-                                                height="32">
                                             <div class="media-body">
                                                 <h5 class="m-0 font-14">Jacob Deo</h5>
                                                 <span class="font-12 mb-0">Developer</span>
@@ -290,41 +284,10 @@
                                         </div>
                                     </div>
 
-                                    <h4 class="header-title mb-1">Campaigns</h4>
+                                    <h4 class="header-title mb-3">memory</h4>
 
-                                    <div id="dash-campaigns-chart" class="apex-charts"
-                                        data-colors="#42d29d,#ffa866,#44badc"></div>
-
-                                    <div class="row text-center mt-2">
-                                        <div class="col-md-4">
-                                            <i
-                                                class="mdi mdi-send widget-icon rounded-circle bg-light-lighten text-muted"></i>
-                                            <h3 class="font-weight-normal mt-3">
-                                                <span>6,510</span>
-                                            </h3>
-                                            <p class="text-muted mb-0 mb-2"><i
-                                                    class="mdi mdi-checkbox-blank-circle text-warning"></i> Total Sent
-                                            </p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <i
-                                                class="mdi mdi-flag-variant widget-icon rounded-circle bg-light-lighten text-muted"></i>
-                                            <h3 class="font-weight-normal mt-3">
-                                                <span>3,487</span>
-                                            </h3>
-                                            <p class="text-muted mb-0 mb-2"><i
-                                                    class="mdi mdi-checkbox-blank-circle text-primary"></i> Reached</p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <i
-                                                class="mdi mdi-email-open widget-icon rounded-circle bg-light-lighten text-muted"></i>
-                                            <h3 class="font-weight-normal mt-3">
-                                                <span>1,568</span>
-                                            </h3>
-                                            <p class="text-muted mb-0 mb-2"><i
-                                                    class="mdi mdi-checkbox-blank-circle text-success"></i> Opened</p>
-                                        </div>
-                                    </div>
+                                    <div id="dash-memory-chart" class="apex-charts"
+                                        data-colors="#42d29d,#ffa866,#44badc" style="height:430px; background-color: #45515d;"></div>
 
                                 </div>
                                 <!-- end card body-->
@@ -447,8 +410,6 @@
                     <label class="custom-control-label" for="boxed-check">Boxed</label>
                 </div>
 
-
-
                 <button class="btn btn-primary btn-block mt-4" id="resetBtn">Reset to Default</button>
 
                 <a href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/"
@@ -468,21 +429,20 @@
     <!-- bundle -->
     <script src="https://coderthemes.com/hyper/creative/assets/js/vendor.min.js"></script>
     <script src="https://coderthemes.com/hyper/creative/assets/js/app.min.js"></script>
-
     <!-- Apex js -->
     <script src="https://coderthemes.com/hyper/creative/assets/js/vendor/apexcharts.min.js"></script>
-
     <!-- Todo js -->
     <script src="https://coderthemes.com/hyper/creative/assets/js/ui/component.todo.js"></script>
-
     <!-- demo app -->
     <script src="https://coderthemes.com/hyper/creative/assets/js/pages/demo.dashboard-crm.js"></script>
     <!-- end demo js-->
     <script type="text/javascript">
 
         var myChart = echarts.init(document.getElementById('dash-cpu-chart'));
+        var youChart = echarts.init(document.getElementById('dash-memory-chart'));
 
         myChart.setOption({
+            color: ['#42d29d'],
             title: {
                 text: 'CPU utilization'
             },
@@ -496,7 +456,7 @@
                 }
             },
             legend: {
-                data: ['cpu', '内存']
+                data: ['cpu']
             },
             toolbox: {
                 feature: {
@@ -520,55 +480,120 @@
             series: [{
                 name: 'cpu',
                 type: 'line',
+                areaStyle: {},
                 data: []
             }]
         });
 
+        youChart.setOption({
+            title: {
+                text: 'Memory utilization'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#fa6767'
+                    }
+                }
+            },
+            legend: {
+                data: ['memory']
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: []
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: 'memory',
+                type: 'line',
+                areaStyle: {},
+                data: []
+            }]
+        });
 
-        var time = ["", "", "", "", "", "", "", "", "", ""],
-            cpu = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
+        var ctime = ["", "", "", "", "", "", "", "", "", ""]
+        var cpu = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        var mtime = ["", "", "", "", "", "", "", "", "", ""]
+        var memory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
         //准备好统一的 callback 函数
         var update_mychart = function (res) {
-            //res是json格式的response对象
-
-            // 隐藏加载动画
-            myChart.hideLoading();
-
+            myChart.hideLoading(); // 隐藏加载动画
             // 准备数据
-            time.push(res.data[0]);
+            ctime.push(res.data[0]);
             cpu.push(parseFloat(res.data[1]));
-            if (time.length >= 10) {
-                time.shift();
+            if (ctime.length >= 10) {
+                ctime.shift();
                 cpu.shift();
             }
-
             // 填入数据
             myChart.setOption({
                 xAxis: {
-                    data: time
+                    data: ctime
                 },
                 series: [{
                     name: 'cpu', // 根据名字对应到相应的系列
                     data: cpu
                 }]
             });
+        };
 
+        var update_youchart = function (res) {
+            youChart.hideLoading(); // 隐藏加载动画
+            // 准备数据
+            mtime.push(res.data[0]);
+            memory.push(parseFloat(res.data[1]));
+            if (mtime.length >= 10) {
+                mtime.shift();
+                memory.shift();
+            }
+            // 填入数据
+            youChart.setOption({
+                xAxis: {
+                    data: mtime
+                },
+                series: [{
+                    name: 'memory', // 根据名字对应到相应的系列
+                    data: memory
+                }]
+            });
         };
 
         // 首次显示加载动画
         myChart.showLoading();
-
+        youChart.showLoading();
 
         // 建立socket连接，等待服务器“推送”数据，用回调函数更新图表
         $(document).ready(function () {
-            namespace = '/test_conn';
-            var socket = io.connect('http://127.0.0.1:9090' + namespace,
+            var socket = io.connect('http://127.0.0.1:9090/get_cpu',
                 { transports: ['websocket'] });
             socket.on('server_response', function (res) {
-                console.log("data:", res.data);
+                console.log("cpu:", res.data);
                 update_mychart(res);
+            });
+
+            var socket_memery = io.connect('http://127.0.0.1:9090/get_memory',
+                { transports: ['websocket'] });
+                socket_memery.on('server_response', function (res) {
+                console.log("memory:", res.data);
+                update_youchart(res);
             });
 
         });
