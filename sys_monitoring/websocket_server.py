@@ -2,6 +2,7 @@
 实现前后端webSockets长连接。
 """
 import time
+import math
 import psutil
 from random import randint
 from flask import Flask, render_template, session, request
@@ -63,9 +64,11 @@ def memory_background_thread():
         t = time.strftime('%H:%M:%S', time.localtime())
         memory = psutil.virtual_memory()
         print("t", t)
-        print("memory-->", t, memory)
+        print("memory-->", t, type(memory), memory)
+        used_mem = math.ceil(memory.used / (1024 * 1024))
+        percent_mem = memory.percent
         socketio.emit('server_response',
-                      {'data': [t, memory], 'count': count}, namespace='/get_memory')
+                      {'data': [t, used_mem], 'count': count, 'percent': percent_mem}, namespace='/get_memory')
 
 
 if __name__ == '__main__':
