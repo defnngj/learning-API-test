@@ -145,7 +145,7 @@ class AuthTest(BaseCase):
 class UploadFileTest(BaseCase):
 
     def test_sample(self):
-        with open('./file.txt', 'rb') as f:
+        with open('file.txt', 'rb') as f:
             files = {'file': f}
             r = requests.post(self.base_url + "/upload", files=files)
             result = r.json()

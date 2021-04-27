@@ -1,6 +1,4 @@
 flask==1.1.2
-requests==2.25.0
-pycryptodome==3.10.1
 psutil==5.8.0
 Flask-SocketIO==4.3.2
 flask-graphql==2.0.1
