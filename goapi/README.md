@@ -72,8 +72,7 @@ GOGCCFLAGS="-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmess
 
 ```shell
 > cd goapi   # 进入web项目目录
-> go mod init gin
-> go mod edit -require github.com/gin-gonic/gin@latest
+> go mod tidy
 ```
 
 5. 安装gin
