@@ -1,6 +1,19 @@
 import os
 import sys
+import json
 import importlib
+
+
+def read_data(file_path: str = None) -> dict:
+    """
+    read JSON data file.
+    """
+    if file_path is None:
+        return {}
+
+    with open(file_path, "r+", encoding="utf-8") as json_file:
+        req_data = json.load(json_file)
+        return req_data
 
 
 def loader(func_name: str = "response_hook", file_name: str = "confrun.py", *args, **kwargs):

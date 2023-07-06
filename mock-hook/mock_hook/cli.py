@@ -1,18 +1,5 @@
 import click
-import json
-from .common import loader
-
-
-def read_data(file_path: str = None) -> dict:
-    """
-    read JSON data file.
-    """
-    if file_path is None:
-        return {}
-
-    with open(file_path, "r+", encoding="utf-8") as json_file:
-        req_data = json.load(json_file)
-        return req_data
+from .common import loader, read_data
 
 
 @click.command()

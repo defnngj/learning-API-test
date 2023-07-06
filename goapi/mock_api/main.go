@@ -54,7 +54,7 @@ func main() {
 		*/
 		var header = make(map[string]string)
 		header["token"] = ""
-		header["klook-user"] = ""
+		header["user"] = ""
 
 		// 从header请求头中提取参数值
 		for k, _ := range header {

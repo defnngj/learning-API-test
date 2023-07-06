@@ -2,7 +2,7 @@
 name = "mock-hook"
 version = "0.1.1"
 description = ""
-authors = ["zhiheng.hu <zhiheng.hu@klook.com>"]
+authors = ["defnngj <defnngj@gmail.com>"]
 readme = "README.md"
 packages = [{include = "mock_hook"}]
 
