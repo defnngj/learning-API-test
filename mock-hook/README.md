@@ -12,21 +12,28 @@
 * 安装
 
 ```bash
-> python3.9 -m pip istall ./dist/mock_hook-0.1.0-py3-none-any.whl 
+> python3.9 -m pip install ./dist/mock_hook-0.1.1-py3-none-any.whl
+```
+
+* 卸载
+
+```bash
+> python3.9 -m pip uninstall mock_hook
 ```
 
 ## Used
 
-* `mock` cli tools.
+* `copycat` cli tools.
 
 ```
-> mock --help
-Usage: mock [OPTIONS]
+> copycat --help
+Usage: copycat [OPTIONS]
 
-  Simple program that greets NAME for a total of COUNT times.
+  Copycat CLI.
 
 Options:
-  --count INTEGER  Number of greetings.
-  --name TEXT      The person to greet.
-  --help           Show this message and exit.
+  -h, --hook TEXT      hook function file.
+  -q, --request TEXT   request data file.
+  -s, --response TEXT  response data file.
+  --help               Show this message and exit.
 ```

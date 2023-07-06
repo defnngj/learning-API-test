@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mock-hook"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["zhiheng.hu <zhiheng.hu@klook.com>"]
 readme = "README.md"
@@ -11,7 +11,7 @@ python = "^3.9"
 click = "^8.1.3"
 
 [tool.poetry.scripts]
-mock = "mock_hook.cli:hello"
+copycat = "mock_hook.cli:main"
 
 [build-system]
 requires = ["poetry-core"]

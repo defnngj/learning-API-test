@@ -1,0 +1,10 @@
+{
+    "header": {
+        "token": "abc123",
+        "user-email": "zhiheng.hu@klook.com"
+    },
+    "param": {
+        "id": "123",
+        "name": "henry"
+    }
+}
