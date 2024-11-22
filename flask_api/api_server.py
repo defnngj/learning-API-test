@@ -8,12 +8,13 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 from flask import session
-from flask import escape
+from html import escape
 from flask_cors import CORS
 from flask import make_response
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
 from Crypto.Cipher import AES    # 请安装 Crypto
+from time import sleep
 
 
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -34,7 +35,7 @@ def response(code=None, message=None, data=[]):
         code = 10200
     if message is None:
         message = "success"
-    
+    sleep(2)
     return jsonify({"code": code, "message": message, "data": data})
 
 

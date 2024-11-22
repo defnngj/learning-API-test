@@ -15,20 +15,28 @@ $ pip install -r requirements.txt
 * __启动接口服务__
 
 ```shell
-$ python api_server.py
+$ flask run
 
-* Serving Flask app "api_server.py" (lazy loading)
- * Environment: production
-   WARNING: Do not use the development server in a production environment.
-   Use a production WSGI server instead.
- * Debug mode: on
- * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
- * Restarting with stat
- * Debugger is active!
- * Debugger PIN: 208-740-173
+* Serving Flask app 'api_server'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
 ```
 
-Flask Web框架可以非常简单的方式实现API，项目中的所有API都在```api_server.py ``` 文件中。 
+* 其他启动参数
+```shell
+# 指定启动文件
+$ flask --app api_server run
+
+# 指定IP
+flask run --host=0.0.0.0
+
+# 指定debug模式
+flask --app hello run --debug
+```
+
+Flask Web框架可以非常简单的方式实现API，项目中的所有API都在`api_server.py` 文件中。 
 
 * __接口测试库__
 
