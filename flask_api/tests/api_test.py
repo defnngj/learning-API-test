@@ -1,5 +1,7 @@
-import requests
 import unittest
+
+import requests
+
 
 class BaseCase(unittest.TestCase):
 
@@ -7,7 +9,30 @@ class BaseCase(unittest.TestCase):
         self.base_url = "http://127.0.0.1:5000"
 
 
-class sampleTest(BaseCase):
+class HttpbinTest(BaseCase):
+
+    def test_get(self):
+        r = requests.get(self.base_url + "/get", params={"id": 1})
+        result = r.json()
+        print(result)
+
+    def test_post(self):
+        r = requests.post(self.base_url + "/post", data={"key": "value"})
+        result = r.json()
+        print(result)
+
+    def test_put(self):
+        r = requests.put(self.base_url + "/put", json={"key": "value"})
+        result = r.json()
+        print(result)
+
+    def test_delete(self):
+        r = requests.delete(self.base_url + "/delete", data={"id": 1})
+        result = r.json()
+        print(result)
+
+
+class SampleTest(BaseCase):
 
     def test_sample(self):
         r = requests.get(self.base_url)
@@ -19,22 +44,22 @@ class SESTfulGetTest(BaseCase):
 
     def test_sample(self):
         name = "tom"
-        r = requests.get(self.base_url + "/user/"+name)
+        r = requests.get(self.base_url + "/user/" + name)
         result = r.json()
         print(result)
 
 
 class GetUserDataTest(BaseCase):
-    
+
     def test_uid_null(self):
         uid = "2"
-        r = requests.get(self.base_url + "/id/"+uid)
+        r = requests.get(self.base_url + "/id/" + uid)
         result = r.json()
         print(result)
 
     def test_uid_exist(self):
         uid = "1"
-        r = requests.get(self.base_url + "/id/"+uid)
+        r = requests.get(self.base_url + "/id/" + uid)
         result = r.json()
         print(result)
 
