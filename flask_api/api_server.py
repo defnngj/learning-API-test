@@ -19,7 +19,7 @@ from time import sleep
 
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = BASE_PATH + '/uploads'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', "json"])
+ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', "json"]
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -27,10 +27,12 @@ app.secret_key = 'please-generate-a-random-secret_key'
 # CORS(app, supports_credentials=True)
 
 
-def response(code=None, message=None, data=[]):
+def response(code=None, message=None, data=None):
     """
     定义返回参数统一格式
     """
+    if data is None:
+        data = []
     if code is None:
         code = 10200
     if message is None:
@@ -98,14 +100,11 @@ def post_login():
         password = request.form.get('password')
 
         if username is None or password is None:
-            return response(10102, "username or passwrord is None")
-        
+            return response(10102, "username or password is None")
         elif username == "" or password == "":
-            return response(10103, "username or passwrord is null")
-        
+            return response(10103, "username or password is null")
         elif username == "admin" and password == "a123456":
             return response(10200, "login success")
-        
         else:
             return response(10104, "username or password error")
     else:
@@ -236,6 +235,8 @@ def more_used(pid):
             return response(10203, "delete success")
         else:
             return response(10103, "The deleted phone id is empty")
+
+    return response(10104, "request method error")
 
 
 # 通过Session 记录登录状态
