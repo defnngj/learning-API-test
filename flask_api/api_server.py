@@ -1,21 +1,19 @@
-import os
-import time
-import json
 import base64
 import hashlib
+import json
+import os
+import time
+from html import escape
 from random import randint
+from time import sleep
+
+from Crypto.Cipher import AES  # 请安装 Crypto
 from flask import Flask
 from flask import jsonify
 from flask import request
-from flask import session
-from html import escape
-from flask_cors import CORS
-from flask import make_response
 from flask import send_from_directory
+from flask import session
 from werkzeug.utils import secure_filename
-from Crypto.Cipher import AES    # 请安装 Crypto
-from time import sleep
-
 
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = BASE_PATH + '/uploads'
@@ -24,7 +22,75 @@ ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', "json"]
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'please-generate-a-random-secret_key'
-# CORS(app, supports_credentials=True)
+
+
+# === 实现 httpbin 风格的接口 ===
+
+@app.route('/get', methods=['GET'])
+def httpbin_get():
+    return jsonify({
+        "args": dict(request.args),  # 查询参数
+        "headers": dict(request.headers),  # 请求头（去掉末尾空行）
+        "method": request.method,
+        "origin": request.remote_addr,  # 客户端 IP
+        "url": request.url
+    })
+
+
+@app.route('/post', methods=['POST'])
+def httpbin_post():
+    # 区分 form-data/x-www-form-urlencoded 和 JSON
+    if request.is_json:
+        json_data = request.get_json()
+    else:
+        json_data = None
+
+    return jsonify({
+        "args": dict(request.args),
+        "data": request.get_data(as_text=True),  # 原始请求体字符串
+        "form": dict(request.form),  # 表单数据
+        "json": json_data,  # JSON 数据（如果存在）
+        "headers": dict(request.headers),
+        "method": request.method,
+        "origin": request.remote_addr,
+        "url": request.url
+    })
+
+
+@app.route('/put', methods=['PUT'])
+def httpbin_put():
+    if request.is_json:
+        json_data = request.get_json()
+    else:
+        json_data = None
+
+    return jsonify({
+        "args": dict(request.args),
+        "data": request.get_data(as_text=True),
+        "json": json_data,
+        "headers": dict(request.headers),
+        "method": request.method,
+        "origin": request.remote_addr,
+        "url": request.url
+    })
+
+
+@app.route('/delete', methods=['DELETE'])
+def httpbin_delete():
+    if request.is_json:
+        json_data = request.get_json()
+    else:
+        json_data = None
+
+    return jsonify({
+        "args": dict(request.args),
+        "data": request.get_data(as_text=True),
+        "json": json_data,
+        "headers": dict(request.headers),
+        "method": request.method,
+        "origin": request.remote_addr,
+        "url": request.url
+    })
 
 
 def response(code=None, message=None, data=None):
@@ -66,7 +132,7 @@ def user(username):
 
 
 # 根据用户id返回数据
-@app.route('/id/<int:uid>',  methods=["GET", "POST"])
+@app.route('/id/<int:uid>', methods=["GET", "POST"])
 def get_uid(uid):
     if request.method == "GET":
         user_info = {"id": 1, "name": "tom", "age": 22}
@@ -93,7 +159,7 @@ def get_search():
 
 
 # post请求， from-data/x-www-from-urlencode参数方式
-@app.route('/login',  methods=["GET", "POST"])
+@app.route('/login', methods=["GET", "POST"])
 def post_login():
     if request.method == "POST":
         username = request.form.get('username')
@@ -112,14 +178,14 @@ def post_login():
 
 
 # post请求，json参数方式
-@app.route('/add_user',  methods=["GET", "POST"])
+@app.route('/add_user', methods=["GET", "POST"])
 def post_add_user():
     if request.method == "POST":
         try:
             data = json.loads(request.get_data())
         except json.decoder.JSONDecodeError:
             return response(10105, "format error")
-        
+
         try:
             name = data["name"]
             age = data["age"]
@@ -162,7 +228,7 @@ def post_auth():
             userid, password = auth_parts[0], auth_parts[2]
             if userid == "" or password == "":
                 return response(10102, "Authorization null")
-            
+
             if userid == "admin" and password == "admin123":
                 return response(10200, "Authorization success!")
             else:
@@ -174,7 +240,7 @@ def post_auth():
 # 文件后缀名的判断
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+        filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 
 # 文件上传的接口
@@ -260,7 +326,7 @@ def session_user_data():
 
 
 # 接口的依赖
-@app.route('/get_activity',  methods=["GET", "POST"])
+@app.route('/get_activity', methods=["GET", "POST"])
 def get_activity():
     if request.method == "GET":
         activity_info = {"id": 1, "name": "618抽奖活动"}
@@ -269,7 +335,7 @@ def get_activity():
         return response(10101, "request method error")
 
 
-@app.route('/get_user',  methods=["GET", "POST"])
+@app.route('/get_user', methods=["GET", "POST"])
 def get_user():
     if request.method == "GET":
         user_info = {"id": 1, "name": "张三"}
@@ -315,10 +381,10 @@ def post_sign():
 
         elif client_time == "" or client_sign == "":
             return response(10103, "time or sign is null")
-        
+
         else:
             # 服务器时间
-            now_time = time.time()    # 例：1466426831
+            now_time = time.time()  # 例：1466426831
             server_time = str(now_time).split('.')[0]
             # 获取时间差
             time_difference = int(server_time) - int(client_time)
@@ -343,6 +409,8 @@ def post_sign():
 ############ AES加密的接口 #############
 
 BS = 16
+
+
 def unpad(s): return s[0: - ord(s[-1])]
 
 
@@ -368,7 +436,7 @@ def post_aes():
         data = request.form.get('data')  # AES加密的数据
 
         if data is None or data == "":
-           return response(10102, "data is None")
+            return response(10102, "data is None")
 
         # 解密
         decode = decryptAES(data)
@@ -379,10 +447,10 @@ def post_aes():
     else:
         return response(10101, "request method error")
 
+
 ############ end #############
 
 
 if __name__ == '__main__':
     app.debug = True
     app.run(port=5000)  # 设置端口
-
